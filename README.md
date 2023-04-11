@@ -10,7 +10,7 @@ on how to use it.
 2. Copy the contents of this repository into your project folder:
 
    ```sh
-   git clone --single-branch --recurse-submodules git@git.mpi-cbg.de:assembly/assembly-project-template.git <project-id>
+   git clone --single-branch --recurse-submodules git@github.com:NBISweden/assembly-project-template.git <project-id>
    cd <project-id>
    rm -rf .git
    git init --shared=group .
