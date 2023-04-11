@@ -1,0 +1,17 @@
+#/assembly/*
+#/rawdata/*
+#/data/*
+#/mapping/*
+*.dat
+*.exe
+*.fasta
+*.fasta.gz
+*.log
+*.o
+*.obj
+*.pdf
+*.sublime-*
+*.tar
+*.tar.gz
+*~
+__pycache__
