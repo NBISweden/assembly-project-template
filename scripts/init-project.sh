@@ -282,12 +282,12 @@ function main()
     then
         token=$(<~/gitlab_token.txt)
 
-        curl -d "{ \"namespace_id\": \"264\", \"name\": \"${PROJECT_ID}\" }" -H "Content-Type:application/json" https://github.com/NBISweden/api/v4/projects?private_token=$token
+        curl -d "{ \"namespace_id\": \"264\", \"name\": \"${PROJECT_ID}\" }" -H "Content-Type:application/json" git@github.com:NBISweden/api/v4/projects?private_token=$token
 
-        git remote add origin git@github.com/orgs/NBISweden:${PROJECT_ID}
+        git remote add origin git@github.com:NBISweden:${PROJECT_ID}
     else
 
-        is_remoteThere=$(git ls-remote --heads git@github.com/orgs/NBISweden:assembly/${PROJECT_ID}.git master | wc -l)
+        is_remoteThere=$(git ls-remote --heads git@github.com:NBISweden:assembly/${PROJECT_ID}.git master | wc -l)
 
         if [ $is_remoteThere -eq 1 ];
         then
@@ -295,7 +295,7 @@ function main()
         else
             token=$(<~/gitlab_token.txt)
 
-            curl -d "{ \"namespace_id\": \"264\", \"name\": \"${PROJECT_ID}\" }" -H "Content-Type:application/json" https://github.com/NBISweden/api/v4/projects?private_token=$token
+            curl -d "{ \"namespace_id\": \"264\", \"name\": \"${PROJECT_ID}\" }" -H "Content-Type:application/json" git@github.com:NBISweden/api/v4/projects?private_token=$token
 
             git remote add origin git@github.com/orgs/NBISweden:${PROJECT_ID}
         fi
