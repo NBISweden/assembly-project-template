@@ -127,11 +127,11 @@ function prompt_for_meta_data()
 
     while true;
     do
-        read -ep "Project Source (VGP|ERGA|Other): " -i "${PROJECT_SOURCE:-}" PROJECT_SOURCE
+        read -ep "Project Source (VREBP|ERGA|Other): " -i "${PROJECT_SOURCE:-}" PROJECT_SOURCE
 
-        [[ "$PROJECT_SOURCE" =~ ^(VGP|ERGA|Other)$ ]] && break
+        [[ "$PROJECT_SOURCE" =~ ^(VREBP|ERGA|Other)$ ]] && break
 
-        echo "error: project source must be one of VGP, ERGA, Other" >&2
+        echo "error: project source must be one of VREBP, ERGA, Other" >&2
     done
 
     read -ep "Species Full Scientific Name (e.g. Bos taurus): " SPECIES_FULL_SCIENTIFIC_NAME
