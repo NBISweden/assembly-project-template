@@ -297,6 +297,18 @@ function main()
     fi
 
     git push ${PROJECT_ID}
+
+    # add git repo to the corresponding team 
+    # add the other teams as well VREBP and Other
+    if [[ ${PROJECT_SOURCE} == "ERGA"  ]]
+    then 
+        team="ERGA assemblies"; 
+        org=NBISweden; 
+        ## TODO should we hard code the team ID ?? 7704367
+        teamid=$(curl -H "Authorization: Token ${token}" -s  "https://api.github.com/orgs/$org/teams" |     jq --arg team "$team" '.[] | select(.name==$team) | .id')
+
+        curl -v -H "Authorization: Token ${token}" -d "" -X PUT "https://api.github.com/teams/$teamid/repos/$org/$repo"        
+    fi 
 }
 
 main "$@"
