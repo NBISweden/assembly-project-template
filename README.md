@@ -1,8 +1,18 @@
 # Assembly Project Template
 
-This is a template for all assembly project. Please read the instructions below
+This is a template for all assembly projects. Please read the instructions below
 on how to use it.
 
+## General Prerequisites on Rackham 
+
+1. You need to have a recent git version
+    ```sh
+    # you might want to add this into your shell config file
+    module load git/2.34.1
+    ```
+2. You need to have the git command line client ([gh](https://cli.github.com/)) in your PATH variable. Either by local installation, or via conda, or we might want to ask the Rackham administration guys to add this tool for us ?! 
+
+3. We also need to create a github access token (stored in `~/github_token.txt`) and a passwordless ssh key access to use the scripts. But whoever creates the initial git repo via this template stores the personal github token into the git config. Thats a problem as anybody within this group can then create repos under another user. *I spoke with Johan about this issue and he will create a general access token for the whole group, which can be used just for setting up the repos and pushing updates into it. That's in the works!*
 
 ## Install
 
@@ -29,22 +39,21 @@ on how to use it.
 
 The general format of a project identifier is
 
-    {type}-{class#1}{genus#3}{species#3}[_{increment}]
+    {type}-{class}-Species_Name[-freeText]
 
 The individual parts are:
 
 - `{type}`:
     - `asm` for _de novo_ assemblies
     - `map` for reference guided/mapping-type projects.
-- `{class#1}`: The first letter of the class of the sequenced indivdual,
-  examples:
-    - `f` for fish
-    - `m` for mammals
-    - `w` for worms
-- `{genus#3}`: The first three letters of the indivdual's genus
-- `{species#3}`: The first three letters of the indivdual's species
-- `_{increment}`: Serial number to distinguish different projects concerning
-  the same species. This is optional for `asm` projects and mandatory for `map`
+    - `ano` annotation ? 
+- `{class}`: Project class or category. For now we set up the following options:
+    - `ERGA` for any project that relates to ERGA
+    - `VREBP` for any project that relates to ERGA
+    - `SMS` short term projects
+    - `OTHER` any project that does not fit into one of the above categories
+    The class determines to which github team the repository will be asscoiated with.
+- `{freeText}`: Usually a aerial number or any other descriptive identifier in order to distinguish different projects concerning the same species (i.e. different individials). This is optional for `asm` projects and mandatory for `map`
   projects.
 
 ## Directory Structure Specification
@@ -54,27 +63,37 @@ The directory structure in the repository is as follows:
 ```
 /
 |-- assembly
-|   |-- DAmar
-|   |-- Falcon
-|   `-- Flye
+|   |-- hifiasm
+|   |-- hicanu
+|   |-- canu
+|   |-- lja
+|   |-- ipa
+|   |-- verkko
+|   `-- flye
 |-- rawdata
-|   |-- 10x
-|   |-- bionano
-|   |-- hic
-|   |-- ont
-|   `-- pacbio
+|   |-- illumina 
+|       |-- 10x
+|       |-- hic
+|       |-- shotgun
+|   |-- pacbio
 |       |-- hifi
 |       |-- isoseq
 |       `-- lofi
-|-- data
-|   |-- 10x
 |   |-- bionano
-|   |-- hic
-|   |-- ont
-|   `-- pacbio
+|   `-- ont
+|-- rawdata
+|   |-- illumina 
+|       |-- 10x
+|       |-- hic
+|       |-- shotgun
+|   |-- pacbio
 |       |-- hifi
 |       |-- isoseq
 |       `-- lofi
+|   |-- bionano
+|   `-- ont
+|-- status
+|-- reports
 |-- scripts
 |   `--pacbio_stats
 `-- QC
@@ -84,28 +103,28 @@ The directory structure in the repository is as follows:
             `-- read_stats
 ```
 
-The contents of each directory are specified in the following.
+The contents of each directory are specified in the following. Some of them need to be further defined.
 
 
 ### `/assembly`
 
-There must be a folder for every assembly pipeline used in the project. Examples are `DAmar`, `Falcon` and `Flye`.
+There must be a folder for every assembly pipeline used in the project. Examples are `hifiasm`, `hicanu` and `flye`. If you want to start an assembly in one of those subdirectories. The scripts (not defined yet, for now bash scripts but those will be migrated into proper nextflow pipelines) should create another layer sub directories `run_1`, `run_2`, etc. in order to descrimnate different runs e.g. hifiasm with PacBio reads, hifiasm with PacBio reads + HiC reads, or even  hifiasm with PacBio reads + HiC reads + Ultr-long ONT reads. 
 
 ### `/rawdata`
 
-Contains all the raw data (preferably in a compressed form). All files should be write-protected right after creation.
+Contains all the raw data (preferably in a compressed form). All files should be write-protected right after creation. All those files should usually be linked from the sequencing storage project 
 
 ### `/rawdata/10x`
 
-The raw 10x data in gzipped FAST/A format (`.fasta.gz`).
+The raw 10x data in gzipped FAST/A format (`.fastq.gz`).
 
 ### `/rawdata/bionano`
 
-The raw bionano data in gzipped FAST/A format (`.fasta.gz`).
+The raw bionano data in gzipped bnx format (`.bnx.gz`).
 
 ### `/rawdata/ont`
 
-The raw Oxford Nanopore data in gzipped `.fast5.gz` format.
+The raw Oxford Nanopore data `.fast5.gz` format.
 
 ### `/rawdata/pacbio`
 
@@ -125,4 +144,26 @@ pipeline.
 
 This folder contains all executable scripts used in this project. Dependencies
 of these scripts should be publicly available and their used version should be
-documented exactly.
+documented exactly. **THIS NEEDS TO BE FILLED WITH SCRIPTS AND PIPELINES THAT COVER ALL AIMS FOR THE DIFFERENT SEQUENCING AND ASSEMBLY INITIATIVES**
+
+### `/reports`
+
+All the pipelines in the scripts directories have to include a part to collect QC metrics, images, program arguments and versions used, runtime stats etc. which will be presented in the reports directory 
+
+### `/results`
+
+A save place where to store the final assemblies, annotation tracks (etc?). So that we can savely remove all intermediate files fron the assembly directories.
+
+### `/status`
+
+**STILL NEEDS TO BE DEFINED** This folder should include empty files which describe the current status of the project. Potential key words could be:
+ 
+- `HIFI_REQUIRED` project will get PacBio HiFi data 
+- `HIC_REQUIRED`  project will get Illumina HiC data 
+- `HIC_QC_DONE`   HiC QC successfully done
+- `HIC_QC_FAILED` HiC QC done but failed 
+- `ASSEMBLY_DONE` assembly done and frozen
+- `WAITING_CUSTOMER` waiting for customer feedback
+- `FINISHED`      Project is finished
+
+... and potentially many more. Those keywords can then be used and visualized on the github repo, but might also be used to trigger certain scripts via cron jobs, which e.g. feed other git repos to keep track of all projects. 

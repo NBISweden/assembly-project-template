@@ -278,33 +278,25 @@ function main()
 
     any_remote=$(git remote -v | wc -l)
 
+    token=$(<~/github_token.txt)
     if [ $any_remote -eq 0 ];
     then
-        token=$(<~/gitlab_token.txt)
-
-        curl -d "{ \"namespace_id\": \"264\", \"name\": \"${PROJECT_ID}\" }" -H "Content-Type:application/json" git@github.com:NBISweden/api/v4/projects?private_token=$token
-
-        git remote add origin git@github.com:NBISweden:${PROJECT_ID}
+        git remote add ${PROJECT_ID} "https://$(<~/gitlab_token.txt)@github.com/NBISweden/${PROJECT_ID}.git"
+        gh repo create --source=. --private NBISweden/${PROJECT_ID}.git
     else
 
-        is_remoteThere=$(git ls-remote --heads git@github.com:NBISweden:assembly/${PROJECT_ID}.git master | wc -l)
+        is_remoteThere=$(git ls-remote --heads git@github.com:NBISweden/${PROJECT_ID}.git master | wc -l)
 
         if [ $is_remoteThere -eq 1 ];
         then
             echo "Git remote exists"
-        else
-            token=$(<~/gitlab_token.txt)
-
-            curl -d "{ \"namespace_id\": \"264\", \"name\": \"${PROJECT_ID}\" }" -H "Content-Type:application/json" git@github.com:NBISweden/api/v4/projects?private_token=$token
-
-            git remote add origin git@github.com/orgs/NBISweden:${PROJECT_ID}
+        else          
+            git remote add ${PROJECT_ID} "https://$(<~/gitlab_token.txt)@github.com/NBISweden/${PROJECT_ID}.git"
+            gh repo create --source=. --private NBISweden/${PROJECT_ID}.git
         fi
-
     fi
 
-    git push origin master
-
+    git push ${PROJECT_ID}
 }
-
 
 main "$@"
