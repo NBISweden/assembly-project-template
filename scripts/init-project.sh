@@ -299,16 +299,31 @@ function main()
     git push ${PROJECT_ID}
 
     # add git repo to the corresponding team 
-    # add the other teams as well VREBP and Other
+    #TODO add the other teams as well VREBP and Other
+    org=NBISweden; 
     if [[ ${PROJECT_SOURCE} == "ERGA"  ]]
     then 
         team="ERGA assemblies"; 
-        org=NBISweden; 
+        
         ## TODO should we hard code the team ID ?? 7704367
         teamid=$(curl -H "Authorization: Token ${token}" -s  "https://api.github.com/orgs/$org/teams" |     jq --arg team "$team" '.[] | select(.name==$team) | .id')
-
-        curl -v -H "Authorization: Token ${token}" -d "" -X PUT "https://api.github.com/teams/$teamid/repos/$org/$repo"        
+        
+    elif [[ ${PROJECT_SOURCE} == "VREBP"  ]]
+    then 
+        team="VREBP assemblies"; 
+        ## TODO should we hard code the team ID ?? 7718981
+        teamid=$(curl -H "Authorization: Token ${token}" -s  "https://api.github.com/orgs/$org/teams" |     jq --arg team "$team" '.[] | select(.name==$team) | .id')
+    else
+        >&2 echo "[WARN] - Team assignment for source \"${PROJECT_SOURCE}\" needs to be added to intit_project.sh"
     fi 
+     
+
+    if [[ "x${teamid}" == "x" ]]
+    then 
+        >&2 echo "[ERROR] - Could not get team id of the \"${team}\" team. The Git repo ${PROJECT_ID} has to be manually added to a team"
+    else 
+        curl -v -H "Authorization: Token ${token}" -d "" -X PUT "https://api.github.com/teams/$teamid/repos/$org/$repo"
+    fi
 }
 
 main "$@"
