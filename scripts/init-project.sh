@@ -325,7 +325,7 @@ function main()
     then 
         >&2 echo "[ERROR] - Could not get team id of the \"${team}\" team. The Git repo ${PROJECT_ID} has to be manually added to a team"
     else 
-        curl -v -H "Authorization: Token ${token}" -d "" -X PUT "https://api.github.com/teams/$teamid/repos/$org/$repo"
+        curl -v -H "Authorization: Token ${token}" -d "" -X PUT "https://api.github.com/teams/$teamid/repos/$org/${PROJECT_ID}"
     fi
 }
 
