@@ -279,6 +279,9 @@ function main()
     any_remote=$(git remote -v | wc -l)
 
     token=$(<~/github_token.txt)
+    # GH_TOKEN needs to be set in order to get gh working properly
+    export GH_TOKEN="${token}"
+    
     if [ $any_remote -eq 0 ];
     then
         git remote add ${PROJECT_ID} "https://${token}@github.com/NBISweden/${PROJECT_ID}.git"
