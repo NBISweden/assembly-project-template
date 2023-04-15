@@ -12,7 +12,7 @@ on how to use it.
     ```
 2. You need to have the git command line client ([gh](https://cli.github.com/)) in your PATH variable. Either by local installation, or via conda, or we might want to ask the Rackham administration guys to add this tool for us ?! 
 
-3. We also need to create a github access token (stored in `~/github_token.txt`) and a passwordless ssh key access to use the scripts. But whoever creates the initial git repo via this template stores the personal github token into the git config. Thats a problem as anybody within this group can then create repos under another user. *I spoke with Johan about this issue and he will create a general access token for the whole group, which can be used just for setting up the repos and pushing updates into it. That's in the works!*
+3. You need the NBIS github access token (just ask Martin :)) and store it as `~/github_token.txt`. For safety reasons, especially on rackham, set the file permission to owner only: `chmod 700 ~/github_token.txt`.
 
 ## Install
 

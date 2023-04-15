@@ -183,6 +183,15 @@ function prompt_for_meta_data()
     [[ -n "$NCBI_TAXONOMY_ID" ]] || unset NCBI_TAXONOMY_ID
 
     read -ep "Sanger ToLID (from https://id.tol.sanger.ac.uk/): " SANGER_TOLID
+
+    while true;
+    do
+        read -ep "Slurm account for computation: " -i "${PROJECT_SLURM_ACCOUNT:-}" PROJECT_SLURM_ACCOUNT
+
+        [[ -z "$PROJECT_SLURM_ACCOUNT" || "$PROJECT_SLURM_ACCOUNT" =~ ^snic[0-9][0-9][0-9][0-9].*$ ]] && break
+
+        echo "error: Slurm account must start with snic-[0-9][0-9][0-9][0-9]" >&2
+    done
 }
 
 
@@ -199,6 +208,25 @@ function print_variables()
 
         echo "$NAME='${VALUE//\'/$QUOTE}'"
     done
+}
+
+function gSizeInBases()
+{
+    local  __resultvar=$1
+    local GSIZE=${GENOME_SIZE}
+    local i=$((${#GSIZE}-1))
+    if [[ "${GSIZE: -1}" =~ [gG] ]]
+    then
+        GSIZE=$((${GSIZE:0:$i}*1000*1000*1000))
+    elif [[ "${GSIZE: -1}" =~ [mM] ]]
+    then
+        GSIZE=$((${GSIZE:0:$i}*1000*1000))
+    elif [[ "${GSIZE: -1}" =~ [kK] ]]
+    then
+        GSIZE=$((${GSIZE:0:$i}*1000))
+    fi   
+
+    eval $__resultvar="'$GSIZE'"
 }
 
 
@@ -230,32 +258,33 @@ function main()
 
     cp ../README.md ../README.template2.md
     
-    sed -i "s/{{PROJECT_ID_INPUT}}/${PROJECT_ID}/g" setup_pacbioLoFi.sh
-    sed -i "s/{{GSIZE_INPUT}}/${GENOME_SIZE}/g" setup_pacbioLoFi.sh
-    
-    sed -i "s/{{PROJECT_ID_INPUT}}/${PROJECT_ID}/g" setup_pacbioHiFi.sh
-    sed -i "s/{{GSIZE_INPUT}}/${GENOME_SIZE}/g" setup_pacbioHiFi.sh
-
-    sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" run_HiFiConsensus.template.sh
-    
-    sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" submit_LongRanger.sh
-
-    sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" submit_GenomeScope.sh
-
     sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" illumina_qc/run_hicQC.slurm
-    sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" illumina_qc/run_10xQC.slurm
+    sed -i "s/{{PROJECT_SLURM_ACCOUNT}}/${PROJECT_SLURM_ACCOUNT}/g" illumina_qc/run_hicQC.slurm
+
+
+    ## set memory and runtime dependening on genome size 
+    ## TODO move this somewhere else, when more variables and different pipelines need to be initialized 
+    gSizeInBases sizeInBases  
+    if [[ ${sizeInBases} -lt 500000000 ]]
+    then 
+        HIFIASM_SLURM_TIME="06:00:00"
+        HIFIASM_SLURM_MEM="30G"
+    elif [[ ${sizeInBases} -lt 1000000000 ]]
+    then 
+        HIFIASM_SLURM_TIME="12:00:00"
+        HIFIASM_SLURM_MEM="80G"
+    elif [[ ${sizeInBases} -lt 1000000000 ]]
+    then 
+        HIFIASM_SLURM_TIME="36:00:00"
+        HIFIASM_SLURM_MEM="200G"
+    fi 
+    sed -i "s/{{PROJECT_SLURM_ACCOUNT}}/${PROJECT_SLURM_ACCOUNT}/g" assembly/hifiasm/hifiasm_default.sbatch
+    sed -i "s/{{HIFIASM_SLURM_TIME}}/${HIFIASM_SLURM_TIME}/g" assembly/hifiasm/hifiasm_default.sbatch
+    sed -i "s/{{HIFIASM_SLURM_MEM}}/${HIFIASM_SLURM_MEM}/g" assembly/hifiasm/hifiasm_default.sbatch
+    sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" assembly/hifiasm/hifiasm_default.sbatch
+
 
     species_id=${PROJECT_ID:4:7}
-
-    sed "s/{{PROJECT_ID}}/${species_id}/g" ./LongRanger/template.longranger.config.sh >& ./LongRanger/${PROJECT_ID}.longranger.config.sh
-    sed -i "s/{{GSIZE_INPUT}}/${GENOME_SIZE}/g" ./LongRanger/${PROJECT_ID}.longranger.config.sh
-    sed "s/{{PROJECT_ID}}/${species_id}/g" ./GenomeScope/template.genomescope.config.sh >& ./GenomeScope/${PROJECT_ID}.genomescope.config.sh
-    sed -i "s/{{GSIZE_INPUT}}/${GENOME_SIZE}/g" ./GenomeScope/${PROJECT_ID}.genomescope.config.sh
-    
-    sed -i "s/{{PROJECT_ID}}/${species_id}/g" ../rawdata/10x/create_symLinks.sh
-
-    sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" ./bionano/assembly_v3.5.1_DLE1_noES.slurm
-    sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" ./bionano/assembly_v3.5.1_DLE1_default.slurm
 
     git add ../README.md
     git add ../README.template.md

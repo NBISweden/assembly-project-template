@@ -13,16 +13,26 @@
 
 ![{{SPECIES_FULL_SCIENTIFIC_NAME}}](images/{{SPECIES_ID}}.jpg)
 
-# PacBio_lofisummary
+# Project Status 
+<!-- STATUS_BLOCK_BEG -->
+<!-- STATUS_BLOCK_END -->
 
-# PacBio_hifisummary
+# Additional Information (literature, more meta data, etc.)
+<!-- INFO_BLOCK_BEG -->
+<!-- INFO_BLOCK_END -->
 
-# BioNano_summary
+# Reports 
+<!-- REPORT_QC_BLOCK_BEG -->
+<!-- REPORT_QC_BLOCK_END -->
 
-# 10X_summary
+<!-- REPORT_ASM_BLOCK_BEG -->
+<!-- REPORT_ASM_BLOCK_END -->
 
-## Genomescope
+<!-- REPORT_SCAF_BLOCK_BEG -->
+<!-- REPORT_SCAF_BLOCK_END -->
 
-## LongRanger
+<!-- REPORT_MC_BLOCK_BEG -->
+<!-- REPORT_MC_BLOCK_END -->
+
 
 -------------------------------------------------------------------------------------------------------

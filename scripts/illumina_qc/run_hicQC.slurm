@@ -1,9 +1,10 @@
 #!/bin/bash
-#SBATCH -J asm_{{PROJECT_ID}}_hicQC
+#SBATCH -J {{PROJECT_ID}}_hicQC
 #SBATCH -p batch
 #SBATCH -c 8 #cores
 #SBATCH -n 1 #nodes
 #SBATCH --time=24:00:00
+#SBATCH -A {{PROJECT_SLURM_ACCOUNT}}
 
 source activate multiqc
 
