@@ -273,18 +273,15 @@ function main()
     then 
         HIFIASM_SLURM_TIME="12:00:00"
         HIFIASM_SLURM_MEM="80G"
-    elif [[ ${sizeInBases} -lt 1000000000 ]]
-    then 
+    else
         HIFIASM_SLURM_TIME="36:00:00"
         HIFIASM_SLURM_MEM="200G"
     fi 
+
     sed -i "s/{{PROJECT_SLURM_ACCOUNT}}/${PROJECT_SLURM_ACCOUNT}/g" assembly/hifiasm/hifiasm_default.sbatch
     sed -i "s/{{HIFIASM_SLURM_TIME}}/${HIFIASM_SLURM_TIME}/g" assembly/hifiasm/hifiasm_default.sbatch
     sed -i "s/{{HIFIASM_SLURM_MEM}}/${HIFIASM_SLURM_MEM}/g" assembly/hifiasm/hifiasm_default.sbatch
     sed -i "s/{{PROJECT_ID}}/${PROJECT_ID}/g" assembly/hifiasm/hifiasm_default.sbatch
-
-
-    species_id=${PROJECT_ID:4:7}
 
     git add ../README.md
     git add ../README.template.md
