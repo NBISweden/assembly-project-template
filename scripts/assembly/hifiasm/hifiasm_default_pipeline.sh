@@ -21,7 +21,7 @@ function usage()
     (>&2 echo -e "steps: TODO")
 }
 
-if [[ $# -lt 2 ]]
+if [[ $# -lt 1 ]]
 then
     usage;
     exit 1;
@@ -71,7 +71,7 @@ then
     exit 1
 fi
 
-if [[ $FROM -lt 1 ]] ;
+if [[ $FROM -lt 0 ]] ;
 then
     (>&2 echo -e "[ERROR]: FROM_STEP ${FROM} must be in [1,5]")
     usage
@@ -85,7 +85,7 @@ then
     exit 1
 fi
 
-myShell=$($(basename $SHELL))
+myShell=$(basename $SHELL)
 if [[ "${myShell}" ==  "bash" ]]
 then 
     shopt -s nullglob extglob
@@ -99,16 +99,16 @@ fi
 
 
 FULL_SCRIPTS_PATH=$(readlink -f $0) 
-DIR_SCRIPTS_PATH=$(dirname ${FULL_PATH})
-SCRIPTS_FILE=$(basename ${FULL_PATH})
+DIR_SCRIPTS_PATH=$(dirname ${FULL_SCRIPTS_PATH})
+SCRIPTS_FILE=$(basename ${FULL_SCRIPTS_PATH})
 
 # 1. try to create a new run directory and link Hifi data into it
 if [[ $FROM -eq 0 ]]
 then
     # A. sanity check - directory should not be present when starting from step 0
-    if [[ -d ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID} ]]
+    if [[ -d ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID} ]]
     then 
-        (>&2 echo -e "[ERROR]: run directory ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID} already present!")
+        (>&2 echo -e "[ERROR]: run directory ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID} already present!")
         (>&2 echo -e "         Either start the script from step 2, use another run dir, or remove the old run dir first!")
         exit 1        
     fi 
@@ -123,38 +123,38 @@ then
     fi 
 
     # C. create run dir and link all HiFi files into it
-    mkdir -p ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID} ||  (>&2 echo -e "[ERROR]: Could not create a new run directory ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID}" && exit 1)
+    mkdir -p ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID} ||  (>&2 echo -e "[ERROR]: Could not create a new run directory ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID}" && exit 1)
 
     c=1;
     for i in ${fastq_files[@]}
     do 
         f=$(basename $i)
         f_ext=${f#*.}
-        ln -s -r ${i} ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID}/HIFI_${c}.${f_ext}
+        ln -s -r ${i} ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID}/HIFI_${c}.${f_ext}
         c=$((c+1))
     done 
 
     (>&2 echo "Step 0 HiFiasm - setup run dir and Link files into it")
-    else 
-        (>&2 echo -e "[INFO] Skip step 0 HiFiasm)!")
-    fi 
+else 
+    (>&2 echo -e "[INFO] Skip step 0 HiFiasm!")
 fi 
 
 # Submit HiFiasm job to the compute cluster
 if [[ $FROM -le 1 && $TO -ge 1 ]]
 then
-    if [[ ! -d ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID} ]]
+    if [[ ! -d ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID} ]]
     then 
-        (>&2 echo -e "[ERROR]: Missing run directory ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID}! Have you started the pipeline from step 0?")
+        (>&2 echo -e "[ERROR]: Missing run directory ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID}! Have you started the pipeline from step 0?")
         exit 1
     fi 
 
-    cp ${DIR_SCRIPTS_PATH}/assembly/hifiasm/hifiasm_default_pipeline.sh ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID}
+    cp ${DIR_SCRIPTS_PATH}/hifiasm_default.sbatch ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID}
 
-    pushd ${DIR_SCRIPTS_PATH}/../../../assembly/pacbio/run_${runID}
-    jid1=$(sbatch hifi_default.sbatch)
+    pushd ${DIR_SCRIPTS_PATH}/../../../assembly/hifiasm/run_${runID}
+    pwd
+    jid1=$(sbatch hifiasm_default.sbatch)
     echo "Step 1 HiFiasm submitted: ${jid1##* }"
     popd 
 else 
-    (>&2 echo -e "[INFO] Skip step 1 HiFiasm)!")
+    (>&2 echo -e "[INFO] Skip step 1 HiFiasm!")
 fi 

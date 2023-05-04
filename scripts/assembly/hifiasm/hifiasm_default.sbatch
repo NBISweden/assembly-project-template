@@ -12,7 +12,7 @@
 # both tools: hifiasm and gfastats need to be accessible in the PATH variable (for now)
 
 
-myShell=$($(basename $SHELL))
+myShell=$(basename $SHELL)
 if [[ "${myShell}" ==  "bash" ]]
 then 
     shopt -s nullglob extglob
