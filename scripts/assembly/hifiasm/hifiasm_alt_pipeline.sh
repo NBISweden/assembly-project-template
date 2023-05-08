@@ -1,26 +1,7 @@
 #!/bin/bash 
 
-# default hifiasm pipeline 
-# steps:
-# 0. create new run directory and link data 
-# 1. run hifiasm - including all pruging options l={0,1,2,3}
-# 2. run busco on all hifiasm fasta files 
-# 3. run purge_dups on all hifiasm fasta files 
-# 4. run busco on purged fasta files
-# 5. create summary markdown files and update git repo 
-
 # exit when any command fails
 set -e
-
-# I WILL WRITE THIS IN ANOTHER WAY
-#function usage()
-#{
-#    (>&2 echo -e "$0 runID [FROM_STEP TO_STEP]\n")
-#    (>&2 echo -e "pipeline to run hifiasm in default mode + busco + purge_dupse + busco\n")
-#    (>&2 echo -e "runId should be an int, the script will create a new dir run_<runID> in assembly/hifiasm")
-#    (>&2 echo -e "")
-#    (>&2 echo -e "steps: TODO")
-#}
 
 # WE WILL TELL EXACTLY WHAT WE WANT TO PASS TO SLURM
 # I AM USING FLAGS BECAUSE I FEEL IT IS MORE EXPLICIT WHAT THEY ARE
@@ -143,10 +124,17 @@ output_script="${projectID}_run_${runID}.sbatch"
 touch $output_script
 
 # CREATE THE SBATCH HEADER WITH THE PARAMETERS
-sbatch_header=$(echo -e "#!/bin/bash\n#SBATCH -J ${projectID}\n#SBATCH -p core\n#SBATCH -c 20 #cores\n#SBATCH -n 1 #nodes\n#SBATCH --time=${runTIME}\n#SBATCH -A ${runPROJECT}\n#SBATCH --mem=${runMEMORY}\n#SBATCH -e hifiasm.%A.err\n#SBATCH -o hifiasm.%A.out")
+sbatch_header=$(echo -e "#!/bin/bash\n#SBATCH -J ${projectID}\n#SBATCH -p core\n#SBATCH -c 20 #cores\n#SBATCH -n 1 #nodes\n#SBATCH --time=${runTIME}\n#SBATCH -A ${runPROJECT}\n#SBATCH --mem=${runMEMORY}\n#SBATCH -e hifiasm.%A.err\n#SBATCH -o hifiasm.%A.out\n")
 
 # ADDING THIS TO THE FILE
 printf "$sbatch_header" >> $output_script
+
+# ADDING TWO EMPTY LINES
+x=$'\n\n'
+printf '%s\n' "$x" >> $output_script
+
+# ADDING THE PROJECT ID
+printf "PROJECT_ID=${projectID}" >> $output_script
 
 # THE REST OF THE SCRIPT
 sbatch_script=$(cat <<-'EOF'
@@ -167,61 +155,61 @@ fi
 
 for l in $(seq 3 -1 0)
 do
-  hifiasm -l${l} -o {{PROJECT_ID}} -t 20  *.{fq,fastq,fq.gz,fastq.gz}
+  hifiasm -l${l} -o ${PROJECT_ID} -t 20  *.{fq,fastq,fq.gz,fastq.gz}
 
   if [[ $l -gt 0 ]]
   then 
-    awk '/^S/{print ">"$2"\n"$3}' {{PROJECT_ID}}.bp.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.p_ctg_l${l}.fasta
-    awk '/^S/{print ">"$2"\n"$3}' {{PROJECT_ID}}.bp.hap1.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap1_l${l}.fasta
-    awk '/^S/{print ">"$2"\n"$3}' {{PROJECT_ID}}.bp.hap2.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap2_l${l}.fasta
+    awk '/^S/{print ">"$2"\n"$3}' ${PROJECT_ID}.bp.p_ctg.gfa | fold > ${PROJECT_ID}.bp.p_ctg_l${l}.fasta
+    awk '/^S/{print ">"$2"\n"$3}' ${PROJECT_ID}.bp.hap1.p_ctg.gfa | fold > ${PROJECT_ID}.bp.hap1_l${l}.fasta
+    awk '/^S/{print ">"$2"\n"$3}' ${PROJECT_ID}.bp.hap2.p_ctg.gfa | fold > ${PROJECT_ID}.bp.hap2_l${l}.fasta
 
-    gfastats {{PROJECT_ID}}.bp.p_ctg_l${l}.fasta > {{PROJECT_ID}}.bp.p_ctg_l${l}.stats.txt &
-    gfastats {{PROJECT_ID}}.bp.hap1_l${l}.fasta > {{PROJECT_ID}}.bp.hap1_l${l}.stats.txt &
-    gfastats {{PROJECT_ID}}.bp.hap2_l${l}.fasta > {{PROJECT_ID}}.bp.hap2_l${l}.stats.txt &
+    gfastats ${PROJECT_ID}.bp.p_ctg_l${l}.fasta > ${PROJECT_ID}.bp.p_ctg_l${l}.stats.txt &
+    gfastats ${PROJECT_ID}.bp.hap1_l${l}.fasta > ${PROJECT_ID}.bp.hap1_l${l}.stats.txt &
+    gfastats ${PROJECT_ID}.bp.hap2_l${l}.fasta > ${PROJECT_ID}.bp.hap2_l${l}.stats.txt &
 
   else
-    awk '/^S/{print ">"$2"\n"$3}' {{PROJECT_ID}}.bp.hap1.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap1_l${l}.fasta
-    awk '/^S/{print ">"$2"\n"$3}' {{PROJECT_ID}}.bp.hap2.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap2_l${l}.fasta 
+    awk '/^S/{print ">"$2"\n"$3}' ${PROJECT_ID}.bp.hap1.p_ctg.gfa | fold > ${PROJECT_ID}.bp.hap1_l${l}.fasta
+    awk '/^S/{print ">"$2"\n"$3}' ${PROJECT_ID}.bp.hap2.p_ctg.gfa | fold > ${PROJECT_ID}.bp.hap2_l${l}.fasta 
 
-    gfastats {{PROJECT_ID}}.bp.hap1_l${l}.fasta > {{PROJECT_ID}}.bp.hap1_l${l}.stats.txt
-    gfastats {{PROJECT_ID}}.bp.hap2_l${l}.fasta > {{PROJECT_ID}}.bp.hap2_l${l}.stats.txt
+    gfastats ${PROJECT_ID}.bp.hap1_l${l}.fasta > ${PROJECT_ID}.bp.hap1_l${l}.stats.txt
+    gfastats ${PROJECT_ID}.bp.hap2_l${l}.fasta > ${PROJECT_ID}.bp.hap2_l${l}.stats.txt
 
   fi 
 done
 
 ## start documentation part 
 
-echo "hifiasm $(hifiasm --version)" > {{PROJECT_ID}}_hifiasm.%A.version 
-echo "gfastats $(gfastats --version | head -n 1)" >> {{PROJECT_ID}}_hifiasm.%A.version 
+echo "hifiasm $(hifiasm --version)" > ${PROJECT_ID}_hifiasm.%A.version 
+echo "gfastats $(gfastats --version | head -n 1)" >> ${PROJECT_ID}_hifiasm.%A.version 
 
 echo "for l in \$(seq 3 -1 0)
 do
-  hifiasm -l\${l} -o {{PROJECT_ID}} -t 20  *.fastq.gz
+  hifiasm -l\${l} -o ${PROJECT_ID} -t 20  *.fastq.gz
 
   if [[ \$l -gt 0 ]]
   then 
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.p_ctg_l\${l}.fasta
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.hap1.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap1_l\${l}.fasta
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.hap2.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap2_l\${l}.fasta
+    awk '/^S/{print \">\"\$2\"\\n\"\$3}' ${PROJECT_ID}.bp.p_ctg.gfa | fold > ${PROJECT_ID}.bp.p_ctg_l\${l}.fasta
+    awk '/^S/{print \">\"\$2\"\\n\"\$3}' ${PROJECT_ID}.bp.hap1.p_ctg.gfa | fold > ${PROJECT_ID}.bp.hap1_l\${l}.fasta
+    awk '/^S/{print \">\"\$2\"\\n\"\$3}' ${PROJECT_ID}.bp.hap2.p_ctg.gfa | fold > ${PROJECT_ID}.bp.hap2_l\${l}.fasta
 
-    gfastats {{PROJECT_ID}}.bp.p_ctg_l\${l}.fasta > {{PROJECT_ID}}.bp.p_ctg_l\${l}.stats.txt &
-    gfastats {{PROJECT_ID}}.bp.hap1_l\${l}.fasta > {{PROJECT_ID}}.bp.hap1_l\${l}.stats.txt &
-    gfastats {{PROJECT_ID}}.bp.hap2_l\${l}.fasta > {{PROJECT_ID}}.bp.hap2_l\${l}.stats.txt &
+    gfastats ${PROJECT_ID}.bp.p_ctg_l\${l}.fasta > ${PROJECT_ID}.bp.p_ctg_l\${l}.stats.txt &
+    gfastats ${PROJECT_ID}.bp.hap1_l\${l}.fasta > ${PROJECT_ID}.bp.hap1_l\${l}.stats.txt &
+    gfastats ${PROJECT_ID}.bp.hap2_l\${l}.fasta > ${PROJECT_ID}.bp.hap2_l\${l}.stats.txt &
 
   else
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.hap1.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap1_l\${l}.fasta
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.hap2.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap2_l\${l}.fasta 
+    awk '/^S/{print \">\"\$2\"\\n\"\$3}' ${PROJECT_ID}.bp.hap1.p_ctg.gfa | fold > ${PROJECT_ID}.bp.hap1_l\${l}.fasta
+    awk '/^S/{print \">\"\$2\"\\n\"\$3}' ${PROJECT_ID}.bp.hap2.p_ctg.gfa | fold > ${PROJECT_ID}.bp.hap2_l\${l}.fasta 
 
-    gfastats {{PROJECT_ID}}.bp.hap1_l\${l}.fasta > {{PROJECT_ID}}.bp.hap1_l\${l}.stats.txt
-    gfastats {{PROJECT_ID}}.bp.hap2_l\${l}.fasta > {{PROJECT_ID}}.bp.hap2_l\${l}.stats.txt
+    gfastats ${PROJECT_ID}.bp.hap1_l\${l}.fasta > ${PROJECT_ID}.bp.hap1_l\${l}.stats.txt
+    gfastats ${PROJECT_ID}.bp.hap2_l\${l}.fasta > ${PROJECT_ID}.bp.hap2_l\${l}.stats.txt
 
   fi 
-done" >> {{PROJECT_ID}}_hifiasm.%A.cmds
+done" >> ${PROJECT_ID}_hifiasm.%A.cmds
 
 EOF
 )
 
-# ADDING IT TO THE SCRIPT FILE
+#ADDING IT TO THE SCRIPT FILE
 printf "$sbatch_script" >> $output_script
 
 # Submit HiFiasm job to the compute cluster
