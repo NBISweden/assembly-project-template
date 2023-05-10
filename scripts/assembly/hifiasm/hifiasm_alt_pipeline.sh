@@ -1,26 +1,7 @@
 #!/bin/bash 
 
-# default hifiasm pipeline 
-# steps:
-# 0. create new run directory and link data 
-# 1. run hifiasm - including all pruging options l={0,1,2,3}
-# 2. run busco on all hifiasm fasta files 
-# 3. run purge_dups on all hifiasm fasta files 
-# 4. run busco on purged fasta files
-# 5. create summary markdown files and update git repo 
-
 # exit when any command fails
 set -e
-
-# I WILL WRITE THIS IN ANOTHER WAY
-#function usage()
-#{
-#    (>&2 echo -e "$0 runID [FROM_STEP TO_STEP]\n")
-#    (>&2 echo -e "pipeline to run hifiasm in default mode + busco + purge_dupse + busco\n")
-#    (>&2 echo -e "runId should be an int, the script will create a new dir run_<runID> in assembly/hifiasm")
-#    (>&2 echo -e "")
-#    (>&2 echo -e "steps: TODO")
-#}
 
 # WE WILL TELL EXACTLY WHAT WE WANT TO PASS TO SLURM
 # I AM USING FLAGS BECAUSE I FEEL IT IS MORE EXPLICIT WHAT THEY ARE
@@ -43,20 +24,6 @@ if [ $# -eq 0 ]; then
     >&2 echo "Write the parameters in a way compatible with SLURM"
     exit 1
 fi
-
-# WE WILL NEED TO SET THESE PARAMS ANYWAY
-## run pipeline from - to, in case of fail and restart 
-#FROM=0
-#TO=5
-
-# MAKE SURE THE RUN NUMBER A.K.A. RUN ID IS A NUMBER
-#re='^[0-9]+$'
-#if ! [[ $runID =~ $re ]] ;
-#then
-#    (>&2 echo -e "[ERROR]: runID ${runID} must be a number")
-#    usage
-#    exit 1
-#fi
 
 # MAKE SURE FROM AND TO MAKES SENSE
 if [[ $FROM -gt $TO ]] ;
@@ -148,6 +115,10 @@ sbatch_header=$(echo -e "#!/bin/bash\n#SBATCH -J ${projectID}\n#SBATCH -p core\n
 # ADDING THIS TO THE FILE
 printf "$sbatch_header" >> $output_script
 
+# ADDING TWO EMPTY LINES
+x=$'\n\n'
+printf '%s\n' "$x" >> $output_script
+
 # THE REST OF THE SCRIPT
 sbatch_script=$(cat <<-'EOF'
 
@@ -190,39 +161,14 @@ do
 done
 
 ## start documentation part 
-
 echo "hifiasm $(hifiasm --version)" > {{PROJECT_ID}}_hifiasm.%A.version 
 echo "gfastats $(gfastats --version | head -n 1)" >> {{PROJECT_ID}}_hifiasm.%A.version 
-
-echo "for l in \$(seq 3 -1 0)
-do
-  hifiasm -l\${l} -o {{PROJECT_ID}} -t 20  *.fastq.gz
-
-  if [[ \$l -gt 0 ]]
-  then 
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.p_ctg_l\${l}.fasta
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.hap1.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap1_l\${l}.fasta
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.hap2.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap2_l\${l}.fasta
-
-    gfastats {{PROJECT_ID}}.bp.p_ctg_l\${l}.fasta > {{PROJECT_ID}}.bp.p_ctg_l\${l}.stats.txt &
-    gfastats {{PROJECT_ID}}.bp.hap1_l\${l}.fasta > {{PROJECT_ID}}.bp.hap1_l\${l}.stats.txt &
-    gfastats {{PROJECT_ID}}.bp.hap2_l\${l}.fasta > {{PROJECT_ID}}.bp.hap2_l\${l}.stats.txt &
-
-  else
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.hap1.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap1_l\${l}.fasta
-    awk '/^S/{print \">\"\$2\"\\n\"\$3}' {{PROJECT_ID}}.bp.hap2.p_ctg.gfa | fold > {{PROJECT_ID}}.bp.hap2_l\${l}.fasta 
-
-    gfastats {{PROJECT_ID}}.bp.hap1_l\${l}.fasta > {{PROJECT_ID}}.bp.hap1_l\${l}.stats.txt
-    gfastats {{PROJECT_ID}}.bp.hap2_l\${l}.fasta > {{PROJECT_ID}}.bp.hap2_l\${l}.stats.txt
-
-  fi 
-done" >> {{PROJECT_ID}}_hifiasm.%A.cmds
 
 EOF
 )
 
 # ADDING IT TO THE SCRIPT FILE
-printf "$sbatch_script" >> $output_script
+echo "$sbatch_script" >> $output_script
 
 # Submit HiFiasm job to the compute cluster
 if [[ $FROM -le 1 && $TO -ge 1 ]]
