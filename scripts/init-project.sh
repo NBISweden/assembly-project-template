@@ -333,6 +333,8 @@ function main()
     # reset proper origin
     git remote remove origin
     git remote add origin "https://${token}@github.com/NBISweden/${PROJECT_ID}.git"
+    # set upstream
+    git push --set-upstream origin master
 
     # add git repo to the corresponding team 
     #TODO add the other teams as well VREBP and Other
