@@ -311,8 +311,14 @@ function main()
     if [ $any_remote -eq 0 ];
     then
         git remote add ${PROJECT_ID} "https://${token}@github.com/NBISweden/${PROJECT_ID}.git"
+        git remote remove origin
+	git remote add origin "https://${token}@github.com/NBISweden/${PROJECT_ID}.git"
         gh repo create --source=../ --private NBISweden/${PROJECT_ID}.git
     else
+
+	## 
+        echo "remote repo already avilable stopt here!"
+        exit 1
 
         is_remoteThere=$(git ls-remote --heads git@github.com:NBISweden/${PROJECT_ID}.git master | wc -l)
 
