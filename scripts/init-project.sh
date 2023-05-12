@@ -311,8 +311,6 @@ function main()
     if [ $any_remote -eq 0 ];
     then
         git remote add ${PROJECT_ID} "https://${token}@github.com/NBISweden/${PROJECT_ID}.git"
-        git remote remove origin
-	git remote add origin "https://${token}@github.com/NBISweden/${PROJECT_ID}.git"
         gh repo create --source=../ --private NBISweden/${PROJECT_ID}.git
     else
 
@@ -332,6 +330,9 @@ function main()
     fi
 
     git push ${PROJECT_ID}
+    # reset proper origin
+    git remote remove origin
+    git remote add origin "https://${token}@github.com/NBISweden/${PROJECT_ID}.git"
 
     # add git repo to the corresponding team 
     #TODO add the other teams as well VREBP and Other
