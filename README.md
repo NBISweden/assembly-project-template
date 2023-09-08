@@ -81,7 +81,7 @@ The directory structure in the repository is as follows:
 |       `-- lofi
 |   |-- bionano
 |   `-- ont
-|-- rawdata
+|-- data
 |   |-- illumina 
 |       |-- 10x
 |       |-- hic
