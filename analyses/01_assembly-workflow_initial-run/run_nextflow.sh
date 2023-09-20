@@ -5,7 +5,7 @@ WORKDIR='/proj/nais/nobackup/nxf-work'
 
 nextflow run -resume \
     --input assembly_parameters.yml \
-    -profile uppmax \
+    -profile uppmax,execution_report \
     -work-dir "$WORKDIR" \
     "$NXF_SCRIPT"
 
