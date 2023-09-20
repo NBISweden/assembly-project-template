@@ -1,0 +1,32 @@
+# Quick Start
+
+- Make a private Project repository from this template repository on Github.
+  1. Select `New Repository` on Github from the `+` symbol in the top right corner.
+  1. Select `NBISweden/assembly_project_template` in `Repository template`.
+  1. Update `owner` to `NBISweden`.
+  1. Provide a repository name following `<project>-<species>-<year>-<short_description>` where
+    - `<project>`: 
+      - `VREBP`: For VR-EBP projects
+      - `ERGA`: For ERGA projects 
+      - `BGE`: For BGE projects
+      - `SMS`: For NBIS short term projects
+    - `<species>`: Species name
+    - `<year>`: Year project started
+    - `<short_description>`: Short project description.
+  1. Ensure repository is private, then click Create repository.
+- Clone it into the NAISS Compute project.
+  ```bash
+  cd /proj/naiss20XX-YY-ZZ
+  git clone git@github.com:NBISweden/<repo>.git 
+  ```
+- Update README in the repository with project details.
+- Copy NGI deliveries to data folder.
+- Link relevant raw data in `data/raw-data`.
+- Update `assembly_parameters.yml` to point to files in `data/raw-data`.
+- Run analyses, activating any necessary compute environments. 
+
+The template provides an organised folder structure, and skeleton files to quickly
+start analyzing.
+
+Analyses are primarily run on Uppmax. Github is used as the primary repository, and
+analysis files should be tracked and pushed regularly.

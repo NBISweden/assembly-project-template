@@ -1,0 +1,5 @@
+# Preface {.unnumbered}
+
+This book is intended as an instruction manual on how to run
+assembly projects in a structured manner so we can collaborate
+effectively.
