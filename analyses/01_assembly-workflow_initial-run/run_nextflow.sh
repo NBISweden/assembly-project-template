@@ -18,7 +18,7 @@ eval "$(conda shell.bash hook)"
 conda activate "${COMPUTEALLOC}/conda/nextflow-env"
 
 # Run Nextflow
-nextflow run -resume \
+nextflow run -resume -ansi-log false \
     --input assembly_parameters.yml \
     --outdir "$RESULTS" \
     -profile uppmax,execution_report \
