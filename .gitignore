@@ -1,17 +1,17 @@
-#/assembly/*
-#/rawdata/*
-#/data/*
-#/mapping/*
-*.dat
-*.exe
-*.fasta
-*.fasta.gz
-*.log
-*.o
-*.obj
-*.pdf
-*.sublime-*
-*.tar
-*.tar.gz
-*~
-__pycache__
+# Project environment files
+conda/
+*.sif
+data/*/*/
+
+# Nextflow files
+.nextflow*
+work/
+
+# Quarto files
+.quarto/
+_site/
+_book/
+**/.gitignore
+
+# misc
+.DS_Store
