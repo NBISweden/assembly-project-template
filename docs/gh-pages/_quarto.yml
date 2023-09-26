@@ -2,12 +2,16 @@ project:
   type: book
 
 book:
-  title: "How to use this template"
+  title: "Assembly project how-to"
   author: "Mahesh Binzer-Panchal"
   date: last-modified
   chapters:
     - preface.qmd
     - quick_start.qmd
+    - initialize.qmd
+    - launch.qmd
+    - monitor.qmd
+    - close.qmd
     - summary.qmd
     - references.qmd
   page-navigation: true
@@ -17,7 +21,7 @@ book:
 
 format:
   html:
-    theme: cosmo
+    theme: flatly
 
 bibliography: references.bib
 

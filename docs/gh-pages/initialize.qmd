@@ -1,0 +1,12 @@
+# Project Initialization
+
+What happens when a new spieces is to be assembled?
+
+## Checklist
+
+- Trello card
+- Github repo
+- 
+
+## Then what?
+

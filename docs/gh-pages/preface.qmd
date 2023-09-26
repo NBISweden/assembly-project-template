@@ -1,5 +1,44 @@
-# Preface {.unnumbered}
+# Onboarding {.unnumbered}
 
-This book is intended as an instruction manual on how to run
-assembly projects in a structured manner so we can collaborate
-effectively.
+Here you can find instructions on how to run assembly projects
+for the VR-EBP, ERGA, and BGE projects.
+
+## Getting started
+
+- Access ( what does one need access to )
+    - Trello
+    - Compute power
+    - NAISS
+    - Redmine ?
+- Initiation
+    - Roles
+
+Life-cyle:
+```mermaid
+graph TD
+    onboard[onboarding] --> project
+    subgraph project
+        direction LR
+        initialize --> launch
+        launch --> monitor
+        monitor --> launch
+        monitor --> closing
+    end
+```
+
+Roles:
+```mermaid
+sequenceDiagram
+    actor Lead
+    actor Sequencer
+    actor Assembler
+    actor Annotator
+    actor Steward
+    actor Analyst
+    Lead ->> Sequencer: Sequence this species
+    Sequencer ->> Assembler: Sequence data delivered
+    Sequencer ->> Steward: Submit read data
+    Assembler ->> Annotator: Assembly finished. Annotate please.
+    Annotator ->> Analyst: Annotation complete. Analyse please.
+    Annotator ->> Steward: Assembly and Annotation complete. Submit it.
+```

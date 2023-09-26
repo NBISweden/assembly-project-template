@@ -1,0 +1,10 @@
+# Monitoring a project
+
+Assembly, annotation, and pop gen analyses are in progress. 
+
+- Who is responsible?
+- What happens when someone else is made responsible?
+- How do we notify project progress?
+- What happens when the data is insufficient?
+- What happens when the data is too contaminated?
+
