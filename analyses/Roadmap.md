@@ -12,5 +12,5 @@ folder relationships.
 
 ```mermaid
 flowchart TD
-  01ASMInit [ 01_assembly-workflow_initial-run ] -> 02ASMPurge [ 02_assembly-workflow_purge-dups ]
+  01ASMInit [ 01_assembly-workflow_initial-run ] --> 02ASMPurge [ 02_assembly-workflow_purge-dups ]
 ```
