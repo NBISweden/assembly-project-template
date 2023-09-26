@@ -7,7 +7,7 @@ book:
   date: last-modified
   chapters:
     - preface.qmd
-    - quick_start.qmd
+    - index.qmd
     - initialize.qmd
     - launch.qmd
     - monitor.qmd

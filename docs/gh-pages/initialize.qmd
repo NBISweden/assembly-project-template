@@ -6,7 +6,7 @@ What happens when a new spieces is to be assembled?
 
 - Trello card
 - Github repo
-- 
+- Assign roles - partially.
 
 ## Then what?
 

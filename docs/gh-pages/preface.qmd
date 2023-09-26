@@ -14,8 +14,8 @@ for the VR-EBP, ERGA, and BGE projects.
     - Roles
 
 Life-cyle:
-```mermaid
-graph TD
+```{mermaid}
+graph LR
     onboard[onboarding] --> project
     subgraph project
         direction LR
@@ -27,7 +27,7 @@ graph TD
 ```
 
 Roles:
-```mermaid
+```{mermaid}
 sequenceDiagram
     actor Lead
     actor Sequencer
