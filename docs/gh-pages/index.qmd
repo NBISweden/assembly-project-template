@@ -1,4 +1,14 @@
-# Quick Start
+# Project Protocols
+
+## Why do we need these protocols?
+
+- To make data findable - (strict folder structure)
+- Ease project tracking - (git)
+- Reduce workload - (automation, code sharing)
+- Reproducibility - (workflows, notebooks, git, documentation, containers)
+- Documentation - (reporting, summaries, issue tracking)
+
+## Quick Start
 
 - Make a private Project repository from this template repository on Github.
     1. Select `New Repository` on Github from the `+` symbol in the top right corner.
@@ -20,10 +30,12 @@
     git clone git@github.com:NBISweden/<repo>.git 
     ```
 - Update README in the repository with project details.
+- Add references to references.bib of important information.
 - Copy NGI deliveries to data folder.
 - Link relevant raw data in `data/raw-data`.
 - Update `assembly_parameters.yml` to point to files in `data/raw-data`.
 - Run analyses, activating any necessary compute environments. 
+- Refer to the other pages here for more in-depth descriptions of the protocols.
 
 The template provides an organised folder structure, and skeleton files to quickly
 start analyzing.
