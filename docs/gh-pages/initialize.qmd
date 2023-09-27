@@ -1,12 +1,10 @@
 # Project Initialization
 
-What happens when a new spieces is to be assembled?
+What happens when a new species is to be assembled?
 
 ## Checklist
 
-- Trello card
+- Trello card? Maybe Github project board supported by a task list per repository.
 - Github repo
-- Assign roles - partially.
-
-## Then what?
-
+    - [ ] Fill in README
+    - [ ] Update references.bib with relevant references.
