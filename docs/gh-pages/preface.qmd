@@ -5,13 +5,12 @@ for the VR-EBP, ERGA, and BGE projects.
 
 ## Getting started
 
-- Access ( what does one need access to )
-    - Trello
-    - Compute power
-    - NAISS
-    - Redmine ?
-- Initiation
-    - Roles
+A Github account is needed. A new member needs to added to the NBISweden Github organisation 
+(Responsible: FIXME), and then to the ERGA assemblies team (Responsible: Martin P.) to access 
+this webpage and template.
+
+New members also need to be added to the NAISS compute and storage allocations in SUPR 
+(Responsible: Henrik).
 
 Life-cyle:
 ```{mermaid}
@@ -26,7 +25,19 @@ graph LR
     end
 ```
 
-Roles:
+## Roles:
+
+### Project roles:
+
+- Lead: Henrik (NBIS), Lucile (NBIS)
+- Sequencer: Ignas (NGI), Christian (NGI)
+- Assembler: Martin P. (NBIS), Mahesh (NBIS), André (NBIS), Guilherme (NBIS), Estelle (NBIS)
+- Annotator: Lucile (NBIS), André (NBIS), Guilherme (NBIS), Martin P. (NBIS)
+- Steward: Stephan (NBIS)
+- Analyst: André (NBIS), Guilherme (NBIS)
+- Developer: Mahesh (NBIS)
+- Monitor: Mahesh (NBIS)
+
 ```{mermaid}
 sequenceDiagram
     actor Lead
@@ -35,6 +46,7 @@ sequenceDiagram
     actor Annotator
     actor Steward
     actor Analyst
+    actor Developer
     Lead ->> Sequencer: Sequence this species
     Sequencer ->> Assembler: Sequence data delivered
     Sequencer ->> Steward: Submit read data
@@ -42,3 +54,14 @@ sequenceDiagram
     Annotator ->> Analyst: Annotation complete. Analyse please.
     Annotator ->> Steward: Assembly and Annotation complete. Submit it.
 ```
+
+### Who to talk to:
+
+- Add to Github organisation: FIXME
+- Add to Github team: Martin P.
+- Add to NAISS compute allocation: Henrik
+- Add to NAISS storage allocation: Henrik
+- How to use the template: Mahesh
+- Code review: Mahesh
+- Protocol review: Mahesh
+- Disk space issues: Entire team
