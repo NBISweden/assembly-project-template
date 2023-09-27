@@ -7,12 +7,13 @@ Analyses have been completed.
 - [ ] The results have been discussed with the team.
 - [ ] README.md in the root of the project is up to date.
 - [ ] Sequence deliveries are in `data/deliveries`.
-- [ ] Raw data is in `data/raw-data`.
-- [ ] Analysis results are in `data/intermediates`.
-- [ ] Frozen/Finialized results are in `data/finalized`.
+- [ ] Raw data is in `data/raw-data` on rackham.
+- [ ] Analysis results are in `data/intermediates` on rackham.
+- [ ] Frozen/Finialized results are in `data/finalized` on rackham.
 - [ ] The roadmap in `analyses/Roadmap.md` is upto date with the relationship between analyses.
 - [ ] Analysis folders names include where the analysis was run.
 - [ ] Git has been used to track the latest executed version of the analyses.
 - [ ] All code used is present in the repository.
 - [ ] An up-to-date finalized report is present in `docs/report`.
 - [ ] The Github repository is up-to-date with the latest tracked files.
+- [ ] All files have data provenance (e.g. where data was downloaded from).
