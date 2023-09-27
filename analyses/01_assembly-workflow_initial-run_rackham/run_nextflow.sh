@@ -17,6 +17,8 @@ export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
 eval "$(conda shell.bash hook)"
 conda activate "${COMPUTEALLOC}/conda/nextflow-env"
 
+# Clean results folder
+
 # Run Nextflow
 nextflow run -resume -ansi-log false \
     --input assembly_parameters.yml \
