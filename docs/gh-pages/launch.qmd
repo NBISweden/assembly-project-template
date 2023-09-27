@@ -4,5 +4,30 @@ Sequence data has arrived. What next?
 
 ## Checklist
 
-## Then what?
+- [ ] WGS delivered?
+- [ ] HiC delivered?
+- [ ] RNAseq delivered?
+- [ ] Isoseq delivered?
+- [ ] Link raw data
+- [ ] Create private project repo from assembly template
 
+## How to:
+
+### Structure data
+
+1. Make a translation table in data/raw-data linking the NGI delivery files to the data we're going to use. Need a way to mark bad data.
+
+### Assemble sequence data
+
+### Annotate assemblies
+
+### Perform downstream analyses
+
+### Integrate new analyses
+
+2. Need a way to integrate custom scripts into template while it's not
+integrated into the workflow. 
+
+### Troubleshoot
+
+3. Need a protocol for troubleshooting. Who to ask
