@@ -25,7 +25,7 @@
         - `<short_description>`: Short project description.
     1. Ensure repository is private, then click Create repository.
 - Clone it into the NAISS Storage project.
-    ```bash
+    ```{.bash}
     cd /proj/snic2021-6-194
     git clone git@github.com:NBISweden/<repo>.git 
     ```
