@@ -1,0 +1,65 @@
+# Launching a Project
+
+Sequence data has arrived. What next?
+
+## Checklist
+
+- [ ] WGS delivered?
+- [ ] HiC delivered?
+- [ ] RNAseq delivered?
+- [ ] Isoseq delivered?
+- [ ] Link raw data
+- [ ] Create private project repo from assembly template
+
+## How to:
+
+### Structure data
+
+All data should be structured in the `data/` folder as follows to make data findable.
+
+```
+data/
+    | - deliveries
+    | - raw-data
+    | - intermediates
+    \ - finalized
+```
+
+- `data/deliveries` contains read-only folders of deliveries from the sequencing centers.
+- `data/raw-data` contains subfolders that indicate the sequence data type, e.g. `PacBio-Revio-WGS` and within those folders
+    are symlinks to data in subfolders of `data/deliveries`. Additional data downloaded from other locations should
+    also be in subfolders and include a shell script that can redownload the file from the original location. e.g.,
+
+    ```bash
+    #! /usr/bin/env bash
+    curl -O ftp://path/to/public/archive/file.ext
+    ```
+
+- `data/intermediates` contains the results from tools lauched in the analyses folders using the same label as the launching folder.
+    e.g., `analyses/01_assembly-workflow_initial-run_rackham` puts results in `data/intermediates/01_assembly-workflow_initial-run_rackham`.
+- `data/finalized` contains symlinks to folders in `data/intermediates` which are stage end-points, e.g. the raw-reads have been processed
+    in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in finalized.
+
+
+1. Make a translation table in data/raw-data linking the NGI delivery files to the data we're going to use. Need a way to mark bad data.
+
+### Assemble sequence data
+
+### Annotate assemblies
+
+### Perform downstream analyses
+
+### Integrate new analyses
+
+2. Need a protocol to integrate custom scripts into template while it's not
+integrated into the workflow. 
+
+- Put custom code in `code/scripts`, `code/snakemake`, `code/nextflow`, and launch scripts under `code/launch_templates`.
+- Make sure the code uses containers or conda environments to package the software environment.
+- Make an issue on the template to integrate the code into the template so that it's shareable until it's integrated into
+a workflow.
+- Make an issue on the relevant workflow to integrate the tools.
+
+### Troubleshoot
+
+3. Need a protocol for troubleshooting. Who to ask

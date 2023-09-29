@@ -2,22 +2,42 @@ project:
   type: book
 
 book:
-  title: "How to use this template"
+  title: "Project standard operating procedures"
   author: "Mahesh Binzer-Panchal"
   date: last-modified
-  chapters:
-    - preface.qmd
-    - quick_start.qmd
-    - summary.qmd
-    - references.qmd
   page-navigation: true
   sidebar:
-    title: TOC
+    title: Protocols
     search: true
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/NBISweden/assembly-project-template
+          - text: Report a Bug
+            url:  https://github.com/NBISweden/assembly-project-template/issues
+  chapters:
+    - preface.qmd
+    - index.qmd
+    - initialize.qmd
+    - launch.qmd
+      # - assembly.qmd
+      # - annotation.qmd
+      # - popgen.qmd
+      # - troubleshoot.qmd
+      # - newtool.qmd
+    - monitor.qmd
+    - close.qmd
+    - summary.qmd
+    - references.qmd
+  repo-url: https://github.com/NBISweden/assembly-project-template
+  repo-actions: [edit, issue]
 
 format:
   html:
-    theme: cosmo
+    toc-depth: 2
+    number-depth: 2
+    theme: minty
 
 bibliography: references.bib
 

@@ -7,6 +7,9 @@
 
 {{PROJECT_DESCRIPTION}}
 
+## Project responsible
+
+- Name: From - Until
 ## General Info
 
 * Project: {{PROJECT_SOURCE}}
@@ -17,25 +20,3 @@
 * ToLID: {{SANGER_TOLID}}
 
 ![{{SPECIES_FULL_SCIENTIFIC_NAME}}](docs/images/{{SPECIES_ID}}.jpg)
-
-# Project Status 
-<!-- STATUS_BLOCK_BEG -->
-<!-- STATUS_BLOCK_END -->
-
-# Additional Information (literature, more meta data, etc.)
-<!-- INFO_BLOCK_BEG -->
-<!-- INFO_BLOCK_END -->
-
-# Reports 
-<!-- REPORT_QC_BLOCK_BEG -->
-<!-- REPORT_QC_BLOCK_END -->
-
-<!-- REPORT_ASM_BLOCK_BEG -->
-<!-- REPORT_ASM_BLOCK_END -->
-
-<!-- REPORT_SCAF_BLOCK_BEG -->
-<!-- REPORT_SCAF_BLOCK_END -->
-
-<!-- REPORT_MC_BLOCK_BEG -->
-<!-- REPORT_MC_BLOCK_END -->
-

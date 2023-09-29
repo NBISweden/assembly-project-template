@@ -1,5 +1,67 @@
-# Preface {.unnumbered}
+# Onboarding {.unnumbered}
 
-This book is intended as an instruction manual on how to run
-assembly projects in a structured manner so we can collaborate
-effectively.
+Here you can find instructions on how to run assembly projects
+for the VR-EBP, ERGA, and BGE projects.
+
+## Getting started
+
+A Github account is needed. A new member needs to added to the NBISweden Github organisation 
+(Responsible: FIXME), and then to the ERGA assemblies team (Responsible: Martin P.) to access 
+this webpage and template.
+
+New members also need to be added to the NAISS compute and storage allocations in SUPR 
+(Responsible: Henrik).
+
+Life-cyle:
+```{mermaid}
+graph LR
+    onboard[onboarding] --> project
+    subgraph project
+        direction LR
+        initialize --> launch
+        launch --> monitor
+        monitor --> launch
+        monitor --> closing
+    end
+```
+
+## Roles:
+
+### Project roles:
+
+- Lead: Henrik (NBIS), Lucile (NBIS)
+- Sequencer: Ignas (NGI), Christian (NGI)
+- Assembler: Martin P. (NBIS), Mahesh (NBIS), André (NBIS), Guilherme (NBIS), Estelle (NBIS)
+- Annotator: Lucile (NBIS), André (NBIS), Guilherme (NBIS), Martin P. (NBIS)
+- Steward: Stephan (NBIS)
+- Analyst: André (NBIS), Guilherme (NBIS)
+- Developer: Mahesh (NBIS)
+- Monitor: Mahesh (NBIS)
+
+```{mermaid}
+sequenceDiagram
+    actor Lead
+    actor Sequencer
+    actor Assembler
+    actor Annotator
+    actor Steward
+    actor Analyst
+    actor Developer
+    Lead ->> Sequencer: Sequence this species
+    Sequencer ->> Assembler: Sequence data delivered
+    Sequencer ->> Steward: Submit read data
+    Assembler ->> Annotator: Assembly finished. Annotate please.
+    Annotator ->> Analyst: Annotation complete. Analyse please.
+    Annotator ->> Steward: Assembly and Annotation complete. Submit it.
+```
+
+### Who to talk to:
+
+- Add to Github organisation: FIXME
+- Add to Github team: Martin P.
+- Add to NAISS compute allocation: Henrik
+- Add to NAISS storage allocation: Henrik
+- How to use the template: Mahesh
+- Code review: Mahesh
+- Protocol review: Mahesh
+- Disk space issues: Entire team
