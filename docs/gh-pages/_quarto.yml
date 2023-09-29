@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "Assembly project how-to"
+  title: "Project standard operating procedures"
   author: "Mahesh Binzer-Panchal"
   date: last-modified
   chapters:
@@ -10,13 +10,18 @@ book:
     - index.qmd
     - initialize.qmd
     - launch.qmd
+      # - assembly.qmd
+      # - annotation.qmd
+      # - popgen.qmd
+      # - troubleshoot.qmd
+      # - newtool.qmd
     - monitor.qmd
     - close.qmd
     - summary.qmd
     - references.qmd
   page-navigation: true
   sidebar:
-    title: TOC
+    title: Protocols
     search: true
 
 format:
