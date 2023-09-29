@@ -14,7 +14,7 @@ New members also need to be added to the NAISS compute and storage allocations i
 
 Life-cyle:
 ```{mermaid}
-graph LR
+flowchart LR
     onboard[onboarding] --> project
     subgraph project
         direction LR
@@ -25,7 +25,7 @@ graph LR
     end
 ```
 
-## Roles:
+## Roles:
 
 ### Project roles:
 
