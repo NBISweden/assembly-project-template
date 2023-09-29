@@ -12,7 +12,7 @@ gh-pages:
 	cd docs/gh-pages && quarto publish gh-pages --no-browser --no-prompt
 
 preview:
-	cd docs/gh-pages && quarto preview &
+	cd docs/gh-pages && quarto preview
 
 ## GIT RULES
 # Link template 

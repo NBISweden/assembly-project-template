@@ -11,6 +11,9 @@ indent_size = 4
 indent_style = space
 insert_final_newline = true
 
+[*.qmd]
+indent_size = 2
+
 [*.{c,h,cpp,hpp,d,sh,py,pl}]
 max_line_length = 100
 

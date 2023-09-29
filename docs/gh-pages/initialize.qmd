@@ -1,4 +1,4 @@
-# Project Initialization
+# Initialization
 
 What happens when a new species is to be assembled?
 

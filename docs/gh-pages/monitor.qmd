@@ -1,4 +1,4 @@
-# Monitoring a project
+# Monitoring
 
 Assembly, annotation, and pop gen analyses are in progress.
 

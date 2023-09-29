@@ -1,34 +1,38 @@
-# Project Protocols
+# Protocols
 
-### Why do we need these protocols?
+Here are the standard operating procedures to follow when performing a genome assembly,
+annotation, and/or further analysis.
+
+## Why do we need these protocols?
 
 - To make data findable - (strict folder structure)
 - Ease project tracking - (git)
 - Reduce workload - (automation, code sharing)
-- Reproducibility - (workflows, notebooks, git, documentation, containers)
+- Reproducibility - (workflows, notebooks, git, documentation, containers, interoperability)
 - Documentation - (reporting, summaries, issue tracking)
 
-### Quick Start
+## Quick Start
 
-- Make a private Project repository from this template repository on Github.
-    1. Select `New Repository` on Github from the `+` symbol in the top right corner.
-    1. Select `NBISweden/assembly_project_template` in `Repository template`.
-    1. Update `owner` to `NBISweden`.
-    1. Provide a repository name following `<project>-<species>-<year>-<short_description>` where
-        - `<project>`: 
-            - `VREBP`: For VR-EBP projects
-            - `ERGA`: For ERGA projects 
-            - `BGE`: For BGE projects
-            - `SMS`: For NBIS short term projects
-        - `<species>`: Species name
-        - `<year>`: Year project started
-        - `<short_description>`: Short project description.
-    1. Ensure repository is private, then click Create repository.
+- Make a ***private*** Project repository from this template repository on Github.
+  1. Select `New Repository` on Github from the `+` symbol in the top right corner.
+  2. Select `NBISweden/assembly_project_template` in `Repository template`.
+  3. Update `owner` to `NBISweden`.
+  4. Provide a repository name following `<project>-<species>-<year>-<short_description>` where
+      - `<project>`: 
+          - `VREBP`: For VR-EBP projects
+          - `ERGA`: For ERGA projects 
+          - `BGE`: For BGE projects
+          - `SMS`: For NBIS short term projects
+      - `<species>`: Species name
+      - `<year>`: Year project started
+      - `<short_description>`: Short project description.
+  5. Ensure repository is private, then click Create repository.
 - Clone it into the NAISS Storage project.
-    ```{.bash}
-    cd /proj/snic2021-6-194
-    git clone git@github.com:NBISweden/<repo>.git 
-    ```
+
+  ```{.bash}
+  cd /proj/snic2021-6-194
+  git clone git@github.com:NBISweden/<repo>.git 
+  ```
 - Update README in the repository with project details.
 - Add references to references.bib of important information.
 - Copy NGI deliveries to data folder.
