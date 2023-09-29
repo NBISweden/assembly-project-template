@@ -1,0 +1,26 @@
+# Mandatory - sample metadata
+sample:
+  id: 'species_name'
+  kmer_size: 31
+  ploidy: 2
+  busco_linages: 'auto'
+# Optional - frozen/finalized assemblies
+assembly:
+  - id: 'prefix-buildID'
+    pri_fasta: '/path/to/data'
+    alt_fasta: '/path/to/data'
+# Optional - Hi-C data if available
+hic:
+  - read1: '/path/to/data'
+    read2: '/path/to/data'
+# Optional - HiFi data if available
+hifi:
+  - reads: '/path/to/data'
+  - reads: '/path/to/data'
+# Optional - RNASeq data if available
+rnaseq:
+  - read1: '/path/to/data'
+    read2: '/path/to/data'
+# Optional - Isoseq data if available
+isoseq:
+  - reads: '/path/to/data'
