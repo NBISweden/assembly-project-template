@@ -9,13 +9,13 @@ book:
   sidebar:
     title: Protocols
     search: true
-    tools:
-      - icon: github
-        menu:
-          - text: Source Code
-            url:  https://github.com/NBISweden/assembly-project-template
-          - text: Report a Bug
-            url:  https://github.com/NBISweden/assembly-project-template/issues
+    # tools:
+    #   - icon: github
+    #     menu:
+    #       - text: Source Code
+    #         url:  https://github.com/NBISweden/assembly-project-template
+    #       - text: Report a Bug
+    #         url:  https://github.com/NBISweden/assembly-project-template/issues
   chapters:
     - preface.qmd
     - index.qmd
