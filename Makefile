@@ -11,6 +11,9 @@
 gh-pages: 
 	cd docs/gh-pages && quarto publish gh-pages --no-browser --no-prompt
 
+preview:
+	cd docs/gh-pages && quarto preview &
+
 ## GIT RULES
 # Link template 
 git-link-template:
@@ -22,5 +25,5 @@ git-merge-template:
 	git merge template/main --allow-unrelated-histories
 
 ## PHONY TARGETS
-.PHONY: gh-pages
+.PHONY: gh-pages preview
 .PHONY: git-link-template git-merge-template
