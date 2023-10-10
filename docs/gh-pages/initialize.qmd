@@ -4,7 +4,10 @@ What happens when a new species is to be assembled?
 
 ## Checklist
 
-- Trello card? Maybe Github project board supported by a task list per repository.
-- Github repo
-    - [ ] Fill in README
-    - [ ] Update references.bib with relevant references.
+- [ ] Make a private GitHub repository from the [Assembly template](https://github.com/NBISweden/assembly-project-template).
+- [ ] Fill in the README.
+- [ ] Make a Project Task List (Click "Issues" on the GitHub repository > Select "Get Started" next to 'Project Task List').
+- [ ] Make an issue for achieved standards (Click "Issues" on the GitHub repository > Select "Get Started" next to 'Achieved standards').
+- [ ] Assign yourself to both issues.
+- [ ] Add these issues to the EBP GitHub Project board.
+- [ ] Update references.bib with relevant references.
