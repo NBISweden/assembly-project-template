@@ -13,10 +13,10 @@ annotation, and/or further analysis.
 
 ## Quick Start
 
-- Make a ***private*** Project repository from this template repository on Github.
-  1. Select `New Repository` on Github from the `+` symbol in the top right corner.
-  2. Select `NBISweden/assembly_project_template` in `Repository template`.
-  3. Update `owner` to `NBISweden`.
+- Make a ***private*** Project repository from [this template repository](https://github.com/NBISweden/assembly-project-template) on Github.
+  1. Click the green `Use this template` button on Github in the upper right corner.
+  2. Check `NBISweden/assembly-project-template` is selected as `Repository template`.
+  3. Check `Owner` is `NBISweden`.
   4. Provide a repository name following `<project>-<species>-<year>-<short_description>` where
       - `<project>`: 
           - `VREBP`: For VR-EBP projects
