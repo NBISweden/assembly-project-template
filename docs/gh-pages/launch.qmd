@@ -21,8 +21,8 @@ All data should be structured in the `data/` folder as follows to make data find
 data/
   | - deliveries
   | - raw-data
-  | - intermediates
-  \ - finalized
+  | - outputs
+  \ - frozen
 ```
 
 - `data/deliveries` contains read-only folders of deliveries from the sequencing centers.
@@ -35,10 +35,10 @@ data/
   curl -O ftp://path/to/public/archive/file.ext
   ```
 
-- `data/intermediates` contains the results from tools lauched in the analyses folders using the same label as the launching folder.
-  e.g., `analyses/01_assembly-workflow_initial-run_rackham` puts results in `data/intermediates/01_assembly-workflow_initial-run_rackham`.
-- `data/finalized` contains symlinks to folders in `data/intermediates` which are stage end-points, e.g. the raw-reads have been processed
-  in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in finalized.
+- `data/outputs` contains the results from tools lauched in the analyses folders using the same label as the launching folder.
+  e.g., `analyses/01_assembly-workflow_initial-run_rackham` puts results in `data/outputs/01_assembly-workflow_initial-run_rackham`.
+- `data/frozen` contains symlinks to folders in `data/outputs` which are stage end-points, e.g. the raw-reads have been processed
+  in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in frozen.
 
 1. Make a translation table in data/raw-data linking the NGI delivery files to the data we're going to use. Need a way to mark bad data.
 
