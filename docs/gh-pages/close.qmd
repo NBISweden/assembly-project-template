@@ -9,7 +9,7 @@ Analyses have been completed.
 - [ ] Sequence deliveries are in `data/deliveries`.
 - [ ] Raw data is in `data/raw-data` on rackham.
 - [ ] Analysis results are in `data/outputs` on rackham.
-- [ ] Frozen/Finialized results are in `data/frozen` on rackham.
+- [ ] Frozen outputs/results are in `data/frozen` on rackham.
 - [ ] `analyses/History.md` is upto date with the relationship between analyses.
 - [ ] Analysis folders names include where the analysis was run.
 - [ ] Git has been used to track the latest executed version of the analyses.
