@@ -11,7 +11,7 @@ e.g., in `analyses/02_custom-script_rackham/run_bash.sh`:
 # Path to where custom code is placed
 SCRIPT_DIR=../../code/scripts/
 
-# Clean up data/intermediates
+# Clean up data/outputs
 ...
 
 # Run custom code
