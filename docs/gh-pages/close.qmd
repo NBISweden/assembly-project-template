@@ -10,7 +10,7 @@ Analyses have been completed.
 - [ ] Raw data is in `data/raw-data` on rackham.
 - [ ] Analysis results are in `data/outputs` on rackham.
 - [ ] Frozen/Finialized results are in `data/frozen` on rackham.
-- [ ] `analyses/Roadmap.md` is upto date with the relationship between analyses.
+- [ ] `analyses/History.md` is upto date with the relationship between analyses.
 - [ ] Analysis folders names include where the analysis was run.
 - [ ] Git has been used to track the latest executed version of the analyses.
 - [ ] All code used is present in the repository.
