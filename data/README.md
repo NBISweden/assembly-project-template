@@ -8,8 +8,8 @@ tracked are the top-level folder structure, README files, and data provenance sc
 /data
     | - deliveries    (data deliveries moved from INBOX and made read-only)
     | - raw-data      (subfolders named after library-type, symlinked to files in deliveries, managed by a script for data integrity)
-    | - intermediates (workflow/script outputs from exploratory phase)
-    \ - finalized     (symlinked folders to `intermediates` marking assembly phase end-points)
+    | - outputs       (workflow/script outputs from exploratory phase)
+    \ - frozen        (symlinked folders to `outputs` marking assembly phase end-points)
 ```
 
 ## Deliveries
@@ -32,11 +32,11 @@ provenance script to refetch data.
 curl -O ftps://path/to/public/archive/file.fasta
 ```
 
-## Intermediates
+## Outputs
 
 Store your analysis results in this folder that are relevant to evaluation.
 Use a folder in `nobackup` to isolate files from a run.
 
-## Finalized
+## Frozen
 
 These are symlinked folders linking to intermediate folders of results that should not change further.

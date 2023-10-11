@@ -8,7 +8,7 @@ an analysis. It is important that a computation environment is activated when la
 either through explicit activation, or using a configuration file. The folder name should also indicate
 where the analysis is supposed to be run (Rackham, NAC, local)
 
-A `Roadmap.md` file is used to communicate how analyses relate to each other. 
+A `History.md` file is used to communicate how analyses relate to each other. 
 For example:
 - which folders run the same workflow but with different parameters.
 - which folders run subsequent analyses to another folder.
@@ -22,7 +22,7 @@ Initial folder structure:
 ```
 analyses
   | - README.md                                 (This file)
-  | - Roadmap.md                                (For longer projects, a roadmap of which analysis lead to what)
+  | - History.md                                (For longer projects, a history of which analysis lead to what)
   |
   \ - 01_assembly-workflow_initial-run_rackham/ (Initial run of the assembly workflow)
         | - assembly_parameters.yml             (Parameter config for all data)

@@ -3,8 +3,8 @@ conda/
 *.sif
 data/deliveries/*/
 data/raw-data/*/
-data/intermediates/*/
-data/finalized/*/
+data/outputs/*/
+data/frozen/*/
 
 # Common bioinformatic file formats
 *.sam
