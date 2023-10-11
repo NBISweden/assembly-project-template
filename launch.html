@@ -239,15 +239,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data/</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  | - deliveries</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  | - raw-data</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  | - intermediates</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  \ - finalized</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  | - outputs</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  \ - frozen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p><code>data/deliveries</code> contains read-only folders of deliveries from the sequencing centers.</p></li>
 <li><p><code>data/raw-data</code> contains subfolders that indicate the sequence data type, e.g.&nbsp;<code>PacBio-Revio-WGS</code> and within those folders are symlinks to data in subfolders of <code>data/deliveries</code>. Additional data downloaded from other locations should also be in subfolders and include a shell script that can redownload the file from the original location. e.g.,</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#! /usr/bin/env bash</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://path/to/public/archive/file.ext</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><code>data/intermediates</code> contains the results from tools lauched in the analyses folders using the same label as the launching folder. e.g., <code>analyses/01_assembly-workflow_initial-run_rackham</code> puts results in <code>data/intermediates/01_assembly-workflow_initial-run_rackham</code>.</p></li>
-<li><p><code>data/finalized</code> contains symlinks to folders in <code>data/intermediates</code> which are stage end-points, e.g.&nbsp;the raw-reads have been processed in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in finalized.</p></li>
+<li><p><code>data/outputs</code> contains the results from tools lauched in the analyses folders using the same label as the launching folder. e.g., <code>analyses/01_assembly-workflow_initial-run_rackham</code> puts results in <code>data/outputs/01_assembly-workflow_initial-run_rackham</code>.</p></li>
+<li><p><code>data/frozen</code> contains symlinks to folders in <code>data/outputs</code> which are stage end-points, e.g.&nbsp;the raw-reads have been processed in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in frozen.</p></li>
 </ul>
 <ol type="1">
 <li>Make a translation table in data/raw-data linking the NGI delivery files to the data we’re going to use. Need a way to mark bad data.</li>
