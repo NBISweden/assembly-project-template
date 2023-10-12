@@ -1,7 +1,10 @@
 # Template instructions
 
 1. Use this template to structure a repository for assembly projects.
-1. Update this `README.md` with the project and species information.
+
+   [PLEASE read the instructions](https://nbisweden.github.io/assembly-project-template/) on how to use it! 
+
+2. Update this `README.md` with the project and species information.
 
 # {{PROJECT_ID}} *de novo* genome assembly
 
