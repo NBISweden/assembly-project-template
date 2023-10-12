@@ -17,3 +17,4 @@ Analyses have been completed.
 - [ ] An up-to-date finalized report is present in `docs/report`.
 - [ ] The Github repository is up-to-date with the latest tracked files.
 - [ ] All files have data provenance (e.g. where data was downloaded from).
+- [ ] If this is a BGE Project, the information has been submitted to COPO and is up-to-date (Contact: Henrik).
