@@ -20,14 +20,15 @@ conda activate "${COMPUTEALLOC}/conda/nextflow-env"
 # Clean results folder
 
 # Run Nextflow
-nextflow run -resume -ansi-log false \
-    --input assembly_parameters.yml \
-    --outdir "$RESULTS" \
-    --project 'naiss2023-5-307' \
+nextflow run "$NXF_SCRIPT" \
     -r main \
     -profile uppmax,execution_report \
     -work-dir "$WORKDIR" \
-    "$NXF_SCRIPT"
+    -resume \
+    -ansi-log false \
+    --project 'naiss2023-5-307' \
+    --input assembly_parameters.yml \
+    --outdir "$RESULTS"
 
 # Clean up Nextflow cache to remove unused files
 nextflow clean -f -before $( nextflow log -q | tail -n 1 )
