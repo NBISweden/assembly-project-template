@@ -5,9 +5,9 @@ COMPUTEALLOC='/proj/snic2021-5-291'
 # NAISS storage allocation
 STORAGEALLOC='/proj/snic2021-6-194'
 # Nextflow work directory (e.g. /proj/snic2021-6-194/BGE-species/analyses/01_.../ -> /proj/snic2021-6-194/nobackup/BGE-species/analyses/01_.../nxf-work)
-WORKDIR="${PWD/$STORAGEALLOC/"$STORAGEALLOC/nobackup"}/nxf-work"
+WORKDIR="${PWD/$STORAGEALLOC/$STORAGEALLOC/nobackup}/nxf-work"
 # Path to store results from Nextflow
-RESULTS="${PWD/analyses/"data/outputs"}"
+RESULTS="${PWD/analyses/data/outputs}"
 # Path to Nextflow script. Pulls from Github
 NXF_SCRIPT="NBISweden/Earth-Biogenome-Project-pilot/main.nf"
 # Set common path to store all Singularity containers
@@ -23,6 +23,7 @@ conda activate "${COMPUTEALLOC}/conda/nextflow-env"
 nextflow run -resume -ansi-log false \
     --input assembly_parameters.yml \
     --outdir "$RESULTS" \
+    --project 'naiss2023-5-307' \
     -profile uppmax,execution_report \
     -work-dir "$WORKDIR" \
     "$NXF_SCRIPT"
