@@ -24,6 +24,7 @@ nextflow run -resume -ansi-log false \
     --input assembly_parameters.yml \
     --outdir "$RESULTS" \
     --project 'naiss2023-5-307' \
+    -r main \
     -profile uppmax,execution_report \
     -work-dir "$WORKDIR" \
     "$NXF_SCRIPT"
