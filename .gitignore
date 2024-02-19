@@ -41,3 +41,5 @@ _book/
 
 # misc
 .DS_Store
+slurm*.out
+slurm*.err
