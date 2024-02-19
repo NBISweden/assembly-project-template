@@ -30,6 +30,7 @@ nextflow run "$NXF_SCRIPT" \
     -ansi-log false \
     --project 'naiss2023-5-307' \
     --input assembly_parameters.yml \
+    --cache "${STORAGEALLOC}/nobackup/database-cache" \
     --outdir "$RESULTS"
 
 # Clean up Nextflow cache to remove unused files
