@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   push:
-    branches: 
+    branches:
       - main
     paths:
       - docs/gh-pages/**
@@ -10,6 +10,7 @@ name: Quarto Publish
 
 jobs:
   build-deploy:
+    if: ${{ github.repository == 'NBISweden/assembly-project-template' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
