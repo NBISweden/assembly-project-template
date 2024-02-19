@@ -11,6 +11,7 @@ assignees: ''
 
 - [ ] Project details updated into `README.md`.
 - [ ] Delivery to `/data/deliveries`.
+    - [ ] Data made read-only.
 - [ ] PacBio WGS data linked in `/data/raw-data/PacBio-WGS`.
 - [ ] Hi-C data linked in `/data/raw-data/Illumina-HiC`.
 - [ ] RNAseq data linked in `/data/raw-data/Illumina-RNAseq`.
