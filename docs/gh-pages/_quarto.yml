@@ -28,7 +28,6 @@ book:
       # - newtool.qmd
     - monitor.qmd
     - close.qmd
-    - summary.qmd
     - references.qmd
   repo-url: https://github.com/NBISweden/assembly-project-template
   repo-actions: [edit, issue]
