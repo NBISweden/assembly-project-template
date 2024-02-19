@@ -18,3 +18,6 @@ Analyses have been completed.
 - [ ] The Github repository is up-to-date with the latest tracked files.
 - [ ] All files have data provenance (e.g. where data was downloaded from).
 - [ ] If this is a BGE Project, the information has been submitted to the BGE tracking tool and is up-to-date (Contact: Henrik).
+- [ ] Data has been delivered to PI.
+- [ ] Nextflow cache has been cleaned.
+- [ ] Results have been appropriately archived.
