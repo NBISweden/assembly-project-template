@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+set -euo pipefail
+
 # NAISS compute allocation
 COMPUTEALLOC='/proj/snic2021-5-291'
 # NAISS storage allocation
@@ -15,7 +17,7 @@ export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
 
 # Activate shared Nextflow environment
 eval "$(conda shell.bash hook)"
-conda activate "${COMPUTEALLOC}/conda/nextflow-env"
+conda activate "${STORAGEALLOC}/conda/nextflow-env"
 
 # Clean results folder
 
