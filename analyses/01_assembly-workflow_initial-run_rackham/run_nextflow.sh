@@ -19,7 +19,10 @@ export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
 eval "$(conda shell.bash hook)"
 conda activate "${STORAGEALLOC}/conda/nextflow-env"
 
-# Clean results folder
+# Drop local cached copy of workflow
+nextflow drop $( nextflow list )
+
+# TODO: Clean results folder
 
 # Run Nextflow
 nextflow run "$NXF_SCRIPT" \
