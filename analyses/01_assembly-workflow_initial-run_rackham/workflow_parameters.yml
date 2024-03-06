@@ -9,7 +9,6 @@ mitohifi:
 # hifiasm: # Optional, default = no extra options: Key (e.g. 'opts01') is used in assembly build name (e.g., 'hifiasm-raw-opts01').
 #   opts01: "--opts A"
 #   opts02: "--opts B"
-# busco: # Optional, default: retrieved from GOAT
-#   lineages: 'auto' # comma separated string of lineages or auto.
 busco:
+#   lineages: 'auto' # comma separated string of lineages or auto. default: retrieved from GOAT
   lineages_db_path: '/sw/data/BUSCO_data/latest/rackham/v5_lineage_sets/lineages'
