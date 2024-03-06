@@ -11,3 +11,5 @@ mitohifi:
 #   opts02: "--opts B"
 # busco: # Optional, default: retrieved from GOAT
 #   lineages: 'auto' # comma separated string of lineages or auto.
+busco:
+  lineages_db_path: '/sw/data/BUSCO_data/latest/rackham/v5_lineage_sets/lineages'
