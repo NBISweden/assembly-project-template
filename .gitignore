@@ -24,6 +24,8 @@ data/frozen/*/
 *.vcf
 *.bcf
 *.csv
+# Don't ignore sample sheets
+!analyses/**/*.csv
 *.tsv
 *.pdb
 *.ped

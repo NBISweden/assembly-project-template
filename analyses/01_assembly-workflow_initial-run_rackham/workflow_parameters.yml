@@ -1,5 +1,7 @@
 project: 'naiss2023-5-307'
 input: 'assembly_parameters.yml'
+mitohifi:
+  code: 1 # TODO; Select genetic code (-o) https://github.com/marcelauliano/MitoHiFi?tab=readme-ov-file#3-parameter-list
 # fastk: # Optional
 #   kmer_size: 31 # default 31
 # genescopefk: # Optional
@@ -7,5 +9,6 @@ input: 'assembly_parameters.yml'
 # hifiasm: # Optional, default = no extra options: Key (e.g. 'opts01') is used in assembly build name (e.g., 'hifiasm-raw-opts01').
 #   opts01: "--opts A"
 #   opts02: "--opts B"
-# busco: # Optional, default: retrieved from GOAT
-#   lineages: 'auto' # comma separated string of lineages or auto.
+busco:
+#   lineages: 'auto' # comma separated string of lineages or auto. default: retrieved from GOAT
+  lineages_db_path: '/sw/data/BUSCO_data/latest/rackham/v5_lineage_sets/lineages'
