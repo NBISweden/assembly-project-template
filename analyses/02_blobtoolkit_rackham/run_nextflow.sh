@@ -11,7 +11,7 @@ WORKDIR="${PWD/$STORAGEALLOC/$STORAGEALLOC/nobackup}/nxf-work"
 # Path to store results from Nextflow
 RESULTS="${PWD/analyses/data/outputs}"
 # Path to Nextflow script. Pulls from Github
-NXF_SCRIPT="NBISweden/Earth-Biogenome-Project-pilot/main.nf"
+NXF_SCRIPT="sanger-tol/blobtoolkit/main.nf"
 # Set common path to store all Singularity containers
 export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
 
@@ -23,14 +23,12 @@ conda activate "${STORAGEALLOC}/conda/nextflow-env"
 
 # Run Nextflow
 nextflow run "$NXF_SCRIPT" \
-    -r main \
-    -latest \
-    -profile uppmax,execution_report \
+    -r 0.3.0 \
+    -profile uppmax \
     -work-dir "$WORKDIR" \
     -resume \
     -ansi-log false \
     -params-file workflow_parameters.yml \
-    --cache "${STORAGEALLOC}/nobackup/database-cache" \
     --outdir "$RESULTS"
 
 # Clean up Nextflow cache to remove unused files
