@@ -39,7 +39,7 @@ function run_nextflow {
     nextflow run "$NXF_SCRIPT" \
         -r "$NXF_BRANCH" \
         -latest \
-        -profile "$PROFILE",execution_report \
+        -profile "$PROFILE" \
         -work-dir "$WORKDIR" \
         -resume \
         -ansi-log false \
