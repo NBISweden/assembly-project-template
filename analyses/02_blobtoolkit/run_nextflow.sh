@@ -12,7 +12,7 @@ function get_cluster_name {
 }
 
 function run_nextflow {
-    PROFILE="$1"                                # Profile to use (values: uppmax, dardel)
+    PROFILE="${PROFILE:-$1}"                    # Profile to use (values: uppmax, dardel)
     STORAGEALLOC="$2"                           # NAISS storage allocation (path)
     WORKDIR="${PWD/analyses/nobackup}/nxf-work" # Nextflow work directory
     RESULTS="${PWD/analyses/data/outputs}"      # Path to store results from Nextflow
