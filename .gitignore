@@ -35,6 +35,7 @@ nobackup/
 # Nextflow files
 .nextflow*
 work/
+nxf-work/
 
 # Quarto files
 .quarto/
