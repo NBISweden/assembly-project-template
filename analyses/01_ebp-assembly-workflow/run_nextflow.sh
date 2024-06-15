@@ -18,9 +18,9 @@ function run_nextflow {
     RESULTS="${PWD/analyses/data/outputs}"      # Path to store results from Nextflow
 
     # Path to Nextflow script. Pulls from Github
-    NXF_SCRIPT="NBISweden/Earth-Biogenome-Project-pilot/main.nf"
+    SCRIPT="${SCRIPT:-NBISweden/Earth-Biogenome-Project-pilot/main.nf}"
     # Workflow version or branch to use (default: main)
-    NXF_BRANCH="${NXF_BRANCH:-main}"
+    BRANCH="${BRANCH:-main}"
 
     # Set common path to store all Singularity containers
     export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
@@ -36,8 +36,8 @@ function run_nextflow {
     fi
 
     # Run Nextflow
-    nextflow run "$NXF_SCRIPT" \
-        -r "$NXF_BRANCH" \
+    nextflow run "$SCRIPT" \
+        -r "$BRANCH" \
         -latest \
         -profile "$PROFILE" \
         -work-dir "$WORKDIR" \
@@ -60,6 +60,7 @@ cluster=$( get_cluster_name )
 if [ "$cluster" == "rackham" ]; then
     run_nextflow uppmax /proj/snic2021-6-194
 elif [ "$cluster" == "dardel" ]; then
+    module load PDC apptainer
     run_nextflow dardel /cfs/klemming/projects/snic/snic2021-6-194
 else 
     echo "Error: unrecognised cluster '$cluster'." >&2
