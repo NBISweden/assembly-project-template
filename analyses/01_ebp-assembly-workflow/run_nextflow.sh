@@ -55,6 +55,7 @@ function run_nextflow {
 
 # Detect cluster name ( rackham, dardel )
 cluster=$( get_cluster_name )
+echo "Running on HPC=$cluster."
 
 # Run Nextflow with appropriate settings
 if [ "$cluster" == "rackham" ]; then
