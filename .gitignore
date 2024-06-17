@@ -5,6 +5,8 @@ data/deliveries/*/
 data/raw-data/*/
 data/outputs/*/
 data/frozen/*/
+nobackup/
+nxf-work/
 
 # Common bioinformatic file formats
 *.sam
