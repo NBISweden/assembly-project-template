@@ -49,6 +49,8 @@ function run_nextflow {
 
     # Clean up Nextflow cache to remove unused files
     nextflow clean -f -before "$( nextflow log -q | tail -n 1 )"
+    # Clean up empty work directories
+    find "$WORKDIR" -type d -empty -delete
     # Use `nextflow log` to see the time and state of the last nextflow executions.
 
 }
