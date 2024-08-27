@@ -7,7 +7,7 @@ function get_cluster_name {
         # Only return cluster names we're catering for
         sacctmgr show cluster -P -n \
         | cut -f1 -d'|' \
-        | grep "rackham\|dardel"
+        | grep "rackham\|dardel\|nac"
     fi
 }
 
@@ -65,6 +65,9 @@ if [ "$cluster" == "rackham" ]; then
 elif [ "$cluster" == "dardel" ]; then
     module load PDC apptainer
     run_nextflow dardel /cfs/klemming/projects/snic/snic2021-6-194
+elif [ "$cluster" == "nac" ]; then
+    module load Singularity
+    run_nextflow nac /projects/earth_biogenome_project/
 else 
     echo "Error: unrecognised cluster '$cluster'." >&2
     exit 1
