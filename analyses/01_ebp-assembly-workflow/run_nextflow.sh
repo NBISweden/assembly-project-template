@@ -64,6 +64,8 @@ if [ "$cluster" == "rackham" ]; then
     run_nextflow uppmax /proj/snic2021-6-194
 elif [ "$cluster" == "dardel" ]; then
     module load PDC apptainer
+    export APPTAINER_CACHEDIR=$PDC_TMP
+    export SINGULARITY_CACHEDIR=$PDC_TMP
     run_nextflow dardel /cfs/klemming/projects/snic/snic2021-6-194
 elif [ "$cluster" == "nac" ]; then
     module load Singularity
