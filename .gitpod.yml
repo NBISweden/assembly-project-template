@@ -1,4 +1,4 @@
-image: nfcore/gitpod:latest
+image: nfcore/gitpod:dev
 
 tasks:
   - name: Install Quarto
@@ -13,4 +13,3 @@ vscode:
   extensions:
     - nf-core.nf-core-extensionpack
     - quarto.quarto
-
