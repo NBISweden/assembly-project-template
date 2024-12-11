@@ -1,16 +1,27 @@
 # Onboarding {.unnumbered}
 
-Here you can find instructions on how to run assembly projects
-for the VR-EBP, ERGA, and BGE projects.
+Here you can find instructions on how to run assembly projects for the VR-EBP, ERGA, and BGE 
+projects.
+
+To ensure consistent, reproducible, and efficient genome assembly and analysis projects, we've 
+established these standard operating procedures (SOPs). By following these guidelines, we aim to 
+optimize our workflows, streamline data management, and facilitate collaboration.
+
+## Why do we need these protocols?
+
+- To make data findable - (strict folder structure)
+- Ease project tracking - (git)
+- Reduce workload - (automation, code sharing)
+- Reproducibility - (workflows, notebooks, git, documentation, containers, interoperability)
+- Documentation - (reporting, summaries, issue tracking)
 
 ## Getting started
 
 A Github account is needed. A new member needs to added to the NBISweden Github organisation 
-(Responsible: FIXME), and then to the ERGA assemblies team (Responsible: Martin P.) to access 
-this webpage and template.
+(ask on #technical-operations), and then to the ERGA assemblies team (Responsible: Martin P.).
 
 New members also need to be added to the NAISS compute and storage allocations in SUPR 
-(Responsible: Henrik).
+(Responsible: Henrik / Mahesh).
 
 Life-cyle:
 ```{mermaid}
@@ -31,11 +42,11 @@ flowchart LR
 
 - Lead: Henrik (NBIS), Lucile (NBIS)
 - Sequencer: Ignas (NGI), Christian (NGI)
-- Assembler: Martin P. (NBIS), Mahesh (NBIS), André (NBIS), Guilherme (NBIS), Estelle (NBIS)
+- Assembler: Martin P. (NBIS), Mahesh (NBIS), André (NBIS), Guilherme (NBIS), Estelle (NBIS), Tomas (NBIS)
 - Annotator: Lucile (NBIS), André (NBIS), Guilherme (NBIS), Martin P. (NBIS)
-- Steward: Stephan (NBIS)
+- Steward: Stephan (NBIS), Yvonne (NBIS)
 - Analyst: André (NBIS), Guilherme (NBIS)
-- Developer: Mahesh (NBIS)
+- Developer: Mahesh (NBIS), Martin P.(NBIS)
 - Monitor: Mahesh (NBIS)
 
 ```{mermaid}
@@ -57,11 +68,12 @@ sequenceDiagram
 
 ### Who to talk to:
 
-- Add to Github organisation: FIXME
+- Add to Github organisation: #technical-operations
 - Add to Github team: Martin P.
-- Add to NAISS compute allocation: Henrik
-- Add to NAISS storage allocation: Henrik
+- Add to NAISS compute allocation: Henrik / Mahesh
+- Add to NAISS storage allocation: Henrik / Mahesh
 - How to use the template: Mahesh
 - Code review: Mahesh
 - Protocol review: Mahesh
 - Disk space issues: Entire team
+- Anything else: #vr-accessibility-ebp
