@@ -1,7 +1,10 @@
 # Protocols
 
-Here are the standard operating procedures to follow when performing a genome assembly,
-annotation, and/or further analysis.
+To ensure consistent, reproducible, and efficient genome assembly and analysis projects, we've 
+established these standard operating procedures (SOPs). By following these guidelines, we aim to 
+optimize our workflows, streamline data management, and facilitate collaboration.
+
+If you're new to these protocols, please see the [onboarding material](preface) first.
 
 ## Why do we need these protocols?
 
@@ -22,15 +25,16 @@ annotation, and/or further analysis.
           - `VREBP`: For VR-EBP projects
           - `ERGA`: For ERGA projects 
           - `BGE`: For BGE projects
-          - `SMS`: For NBIS short term projects
+          - `SMS`: For NBIS user-fee projects
+          - `LTS`: For NBIS peer-review projects
       - `<species>`: Species name
       - `<year>`: Year project started
       - `<short_description>`: Short project description.
   5. Ensure repository is private, then click Create repository.
-- Clone it into the NAISS Storage project.
+- Clone it into the NAISS Storage project or your folder on NAC.
 
   ```{.bash}
-  cd /proj/snic2021-6-194
+  cd <project allocation>
   git clone git@github.com:NBISweden/<repo>.git 
   ```
 - Update README in the repository with project details.
@@ -44,5 +48,5 @@ annotation, and/or further analysis.
 The template provides an organised folder structure, and skeleton files to quickly
 start analyzing.
 
-Analyses are primarily run on Uppmax. Github is used as the primary repository, and
+Analyses are primarily run on Uppmax or PDC. Github is used as the primary repository, and
 analysis files should be tracked and pushed regularly.
