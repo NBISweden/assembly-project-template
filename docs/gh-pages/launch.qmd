@@ -40,20 +40,59 @@ data/
 - `data/frozen` contains symlinks to folders in `data/outputs` which are stage end-points, e.g. the raw-reads have been processed
   in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in frozen.
 
-1. Make a translation table in data/raw-data linking the NGI delivery files to the data we're going to use. Need a way to mark bad data.
+## Link data between folders
+
+Data in `data/raw-data/*` should be symlinked from `data/deliveries/**`. 
+
+E.g.,
+
+```{.bash}
+cd data/raw-data/PacBio-Hifi
+find ../../deliveries -name "*.bam" -o -name "*.pbi" -exec ln -s {} . \;
+```
+
+and
+
+```{.bash}
+cd data/raw-data/Illumina-HiC
+find ../../deliveries -name "*.fastq.gz" -exec ln -s {} . \;
+```
 
 ### Assemble sequence data
 
+```{.bash}
+cd analyses/01_ebp-assembly-workflow
+```
+
+1. Update the `assembly_parameters.yml` with the paths to input files. Check the YML for a bash
+snippet to fill out the section.
+2. Update the `workflow_parameters.yml` with any extra workflow parameters. In particular, 
+check anything marked as TODO, e.g., selecting the mitochondrial code table to use.
+3. Run the workflow.
+
+  ```{.bash}
+  ./run_nextflow.sh
+  ```
+
+::: {.callout-note}
+The workflow above only runs until Hi-C mapping. Steps for manual curation onwards are still
+being implemented.
+:::
+
 ### Annotate assemblies
+
+No protocols as of yet
 
 ### Perform downstream analyses
 
+No protocols as of yet
+
 ### Integrate new analyses
 
-2. Need a protocol to integrate custom scripts into template while it's not
-integrated into the workflow. 
+Custom analyses might be needed. In these cases please make use of the other project folders,
+and do your best to version control all the steps. 
 
-- Put custom code in `code/scripts`, `code/snakemake`, `code/nextflow`, and launch scripts under `code/launch_templates`.
+- Put custom code in `code/scripts`, `code/snakemake`, and `code/nextflow`.
 - Make sure the code uses containers or conda environments to package the software environment.
 - Make an issue on the template to integrate the code into the template so that it's shareable until it's integrated into
 a workflow.
@@ -61,4 +100,4 @@ a workflow.
 
 ### Troubleshoot
 
-3. Need a protocol for troubleshooting. Who to ask
+If you encounter any issues with using these protocols please ask on #vr-accessibility-ebp.

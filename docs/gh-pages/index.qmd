@@ -39,7 +39,7 @@ If you're new to these protocols, please see the [onboarding material](preface) 
   ```
 - Update README in the repository with project details.
 - Add references to references.bib of important information.
-- Copy NGI deliveries to data folder.
+- Copy NGI deliveries to data folder (see [launch page](launch)).
 - Link relevant raw data in `data/raw-data`.
 - Update `assembly_parameters.yml` to point to files in `data/raw-data`.
 - Run analyses, activating any necessary compute environments. 
