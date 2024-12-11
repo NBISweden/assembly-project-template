@@ -1,8 +1,6 @@
 image: nfcore/gitpod:dev
 
 tasks:
-  - name: Install Quarto
-    command: conda install quarto -y && conda clean -a -y && exit
   - name: Install Pixi
     command: |
       sudo chown gitpod -R /home/gitpod/
