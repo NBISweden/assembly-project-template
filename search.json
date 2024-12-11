@@ -4,29 +4,29 @@
     "href": "index.html",
     "title": "Project standard operating procedures",
     "section": "",
-    "text": "1 Protocols\nHere are the standard operating procedures to follow when performing a genome assembly, annotation, and/or further analysis.",
+    "text": "1 Running assembly projects\nIf you’re new to these protocols, please see the onboarding material first.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Protocols</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#why-do-we-need-these-protocols",
-    "href": "index.html#why-do-we-need-these-protocols",
-    "title": "Project standard operating procedures",
-    "section": "1.1 Why do we need these protocols?",
-    "text": "1.1 Why do we need these protocols?\n\nTo make data findable - (strict folder structure)\nEase project tracking - (git)\nReduce workload - (automation, code sharing)\nReproducibility - (workflows, notebooks, git, documentation, containers, interoperability)\nDocumentation - (reporting, summaries, issue tracking)",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Protocols</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Running assembly projects</span>"
     ]
   },
   {
     "objectID": "index.html#quick-start",
     "href": "index.html#quick-start",
     "title": "Project standard operating procedures",
-    "section": "1.2 Quick Start",
-    "text": "1.2 Quick Start\n\nMake a private Project repository from this template repository on Github.\n\nClick the green Use this template button on Github in the upper right corner.\nCheck NBISweden/assembly-project-template is selected as Repository template.\nCheck Owner is NBISweden.\nProvide a repository name following &lt;project&gt;-&lt;species&gt;-&lt;year&gt;-&lt;short_description&gt; where\n\n&lt;project&gt;:\n\nVREBP: For VR-EBP projects\nERGA: For ERGA projects\nBGE: For BGE projects\nSMS: For NBIS short term projects\n\n&lt;species&gt;: Species name\n&lt;year&gt;: Year project started\n&lt;short_description&gt;: Short project description.\n\nEnsure repository is private, then click Create repository.\n\nClone it into the NAISS Storage project.\ncd /proj/snic2021-6-194\ngit clone git@github.com:NBISweden/&lt;repo&gt;.git \nUpdate README in the repository with project details.\nAdd references to references.bib of important information.\nCopy NGI deliveries to data folder.\nLink relevant raw data in data/raw-data.\nUpdate assembly_parameters.yml to point to files in data/raw-data.\nRun analyses, activating any necessary compute environments.\nRefer to the other pages here for more in-depth descriptions of the protocols.\n\nThe template provides an organised folder structure, and skeleton files to quickly start analyzing.\nAnalyses are primarily run on Uppmax. Github is used as the primary repository, and analysis files should be tracked and pushed regularly.",
+    "section": "1.1 Quick Start",
+    "text": "1.1 Quick Start\n\nMake a private Project repository from this template repository on Github.\n\nClick the green Use this template button on Github in the upper right corner.\nCheck NBISweden/assembly-project-template is selected as Repository template.\nCheck Owner is NBISweden.\nProvide a repository name following &lt;project&gt;-&lt;species&gt;-&lt;year&gt;-&lt;short_description&gt; where\n\n&lt;project&gt;:\n\nVREBP: For VR-EBP projects\nERGA: For ERGA projects\nBGE: For BGE projects\nSMS: For NBIS user-fee projects\nLTS: For NBIS peer-review projects\n\n&lt;species&gt;: Species name\n&lt;year&gt;: Year project started\n&lt;short_description&gt;: Short project description.\n\nEnsure repository is private, then click Create repository.\n\nClone it into the NAISS Storage project or your folder on NAC.\ncd &lt;project allocation&gt;\ngit clone git@github.com:NBISweden/&lt;repo&gt;.git \nUpdate README in the repository with project details.\nAdd references to references.bib of important information.\nCopy NGI deliveries to data folder (see launch page).\nLink relevant raw data in data/raw-data.\nUpdate assembly_parameters.yml to point to files in data/raw-data.\nRun analyses (./run_nextflow.sh)\nRefer to the other pages here for more in-depth descriptions of the protocols.\n\nThe template provides an organised folder structure, and skeleton files to quickly start analyzing.\nAnalyses are primarily run on Uppmax or PDC. Github is used as the primary repository, and analysis files should be tracked and pushed regularly.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Protocols</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Running assembly projects</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#running-a-test-assembly-analysis",
+    "href": "index.html#running-a-test-assembly-analysis",
+    "title": "Project standard operating procedures",
+    "section": "1.2 Running a test assembly analysis",
+    "text": "1.2 Running a test assembly analysis\nFollow the steps above to make a repository for a test species. If you would like to use real data then feel free to use Laetiporus sulphureus (Chicken of the Woods).\nFrom the Data tab, download the bam file for PacBio HiFi into the deliveries folder:\nwget ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR680/ERR6808041/m64229e_210602_121910.ccs.bc1020_BAK8B_OA--bc1020_BAK8B_OA.bam\nand the FastQ files for HiC (Arima v2) into the deliveries folder:\nwget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR668/000/ERR6688740/ERR6688740_1.fastq.gz\nwget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR668/000/ERR6688740/ERR6688740_2.fastq.gz\nSymlink the files into appropriate folders under raw-data.\nThen edit the assembly_parameters.yml to point to the data linked under raw-data, using the bash snippets in the assembly_parameters.yml to help you write the input file.\nUpdate the workflow_parameters.yml and change the mitohifi.code parameter to 4 (see NCBI Taxonomy Browser).\nFinally, open a screen session and then run the launch script (./run_nextflow.sh).",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Running assembly projects</span>"
     ]
   },
   {
@@ -34,7 +34,27 @@
     "href": "preface.html",
     "title": "Onboarding",
     "section": "",
-    "text": "Getting started\nA Github account is needed. A new member needs to added to the NBISweden Github organisation (Responsible: FIXME), and then to the ERGA assemblies team (Responsible: Martin P.) to access this webpage and template.\nNew members also need to be added to the NAISS compute and storage allocations in SUPR (Responsible: Henrik).\nLife-cyle:\nflowchart LR\n    onboard[onboarding] --&gt; project\n    subgraph project\n        direction LR\n        initialize --&gt; launch\n        launch --&gt; monitor\n        monitor --&gt; launch\n        monitor --&gt; closing\n    end",
+    "text": "Why do we need these protocols?\nHere you can find instructions on how to run assembly projects for the VR-EBP, ERGA, and BGE projects.\nTo ensure consistent, reproducible, and efficient genome assembly and analysis projects, we’ve established these standard operating procedures (SOPs). By following these guidelines, we aim to optimize our workflows, streamline data management, and facilitate collaboration.",
+    "crumbs": [
+      "Onboarding"
+    ]
+  },
+  {
+    "objectID": "preface.html#why-do-we-need-these-protocols",
+    "href": "preface.html#why-do-we-need-these-protocols",
+    "title": "Onboarding",
+    "section": "",
+    "text": "To make data findable - (strict folder structure)\nEase project tracking - (git)\nReduce workload - (automation, code sharing)\nReproducibility - (workflows, notebooks, git, documentation, containers, interoperability)\nDocumentation - (reporting, summaries, issue tracking)",
+    "crumbs": [
+      "Onboarding"
+    ]
+  },
+  {
+    "objectID": "preface.html#getting-started",
+    "href": "preface.html#getting-started",
+    "title": "Onboarding",
+    "section": "Getting started",
+    "text": "Getting started\nA Github account is needed. A new member needs to added to the NBISweden Github organisation (ask on #technical-operations), and then to the ERGA assemblies team (Responsible: Martin P.).\nNew members also need to be added to the NAISS compute and storage allocations in SUPR (Responsible: Henrik / Mahesh).\nLife-cyle:\n\n\n\n\n\nflowchart LR\n    onboard[onboarding] --&gt; project\n    subgraph project\n        direction LR\n        initialize --&gt; launch\n        launch --&gt; monitor\n        monitor --&gt; launch\n        monitor --&gt; closing\n    end",
     "crumbs": [
       "Onboarding"
     ]
@@ -44,7 +64,7 @@
     "href": "preface.html#roles",
     "title": "Onboarding",
     "section": "Roles:",
-    "text": "Roles:\n\nProject roles:\n\nLead: Henrik (NBIS), Lucile (NBIS)\nSequencer: Ignas (NGI), Christian (NGI)\nAssembler: Martin P. (NBIS), Mahesh (NBIS), André (NBIS), Guilherme (NBIS), Estelle (NBIS)\nAnnotator: Lucile (NBIS), André (NBIS), Guilherme (NBIS), Martin P. (NBIS)\nSteward: Stephan (NBIS)\nAnalyst: André (NBIS), Guilherme (NBIS)\nDeveloper: Mahesh (NBIS)\nMonitor: Mahesh (NBIS)\n\n\n\n\n\n\nsequenceDiagram\n    actor Lead\n    actor Sequencer\n    actor Assembler\n    actor Annotator\n    actor Steward\n    actor Analyst\n    actor Developer\n    Lead -&gt;&gt; Sequencer: Sequence this species\n    Sequencer -&gt;&gt; Assembler: Sequence data delivered\n    Sequencer -&gt;&gt; Steward: Submit read data\n    Assembler -&gt;&gt; Annotator: Assembly finished. Annotate please.\n    Annotator -&gt;&gt; Analyst: Annotation complete. Analyse please.\n    Annotator -&gt;&gt; Steward: Assembly and Annotation complete. Submit it.\n\n\n\n\n\n\n\n\nWho to talk to:\n\nAdd to Github organisation: FIXME\nAdd to Github team: Martin P.\nAdd to NAISS compute allocation: Henrik\nAdd to NAISS storage allocation: Henrik\nHow to use the template: Mahesh\nCode review: Mahesh\nProtocol review: Mahesh\nDisk space issues: Entire team",
+    "text": "Roles:\n\nProject roles:\n\nLead: Henrik (NBIS), Lucile (NBIS)\nSequencer: Ignas (NGI), Christian (NGI)\nAssembler: Martin P. (NBIS), Mahesh (NBIS), André (NBIS), Guilherme (NBIS), Estelle (NBIS), Tomas (NBIS)\nAnnotator: Lucile (NBIS), André (NBIS), Guilherme (NBIS), Martin P. (NBIS)\nSteward: Stephan (NBIS), Yvonne (NBIS)\nAnalyst: André (NBIS), Guilherme (NBIS)\nDeveloper: Mahesh (NBIS), Martin P.(NBIS)\nMonitor: Mahesh (NBIS)\n\n\n\n\n\n\nsequenceDiagram\n    actor Lead\n    actor Sequencer\n    actor Assembler\n    actor Annotator\n    actor Steward\n    actor Analyst\n    actor Developer\n    Lead -&gt;&gt; Sequencer: Sequence this species\n    Sequencer -&gt;&gt; Assembler: Sequence data delivered\n    Sequencer -&gt;&gt; Steward: Submit read data\n    Assembler -&gt;&gt; Annotator: Assembly finished. Annotate please.\n    Annotator -&gt;&gt; Analyst: Annotation complete. Analyse please.\n    Annotator -&gt;&gt; Steward: Assembly and Annotation complete. Submit it.\n\n\n\n\n\n\n\n\nWho to talk to:\n\nAdd to Github organisation: #technical-operations\nAdd to Github team: Martin P.\nAdd to NAISS compute allocation: Henrik / Mahesh\nAdd to NAISS storage allocation: Henrik / Mahesh\nHow to use the template: Mahesh\nCode review: Mahesh\nProtocol review: Mahesh\nDisk space issues: Entire team\nAnything else: #vr-accessibility-ebp",
     "crumbs": [
       "Onboarding"
     ]
@@ -54,7 +74,7 @@
     "href": "initialize.html",
     "title": "2  Initialization",
     "section": "",
-    "text": "2.1 Checklist",
+    "text": "2.1 Checklist\nWhat happens when a new species is to be assembled?",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Initialization</span>"
     ]
@@ -64,7 +84,7 @@
     "href": "initialize.html#checklist",
     "title": "2  Initialization",
     "section": "",
-    "text": "Make a private GitHub repository from the Assembly template.\nFill in the README.\nMake a Project Task List (Click “Issues” on the GitHub repository &gt; Select “Get Started” next to ‘Project Task List’).\nMake an issue for achieved standards (Click “Issues” on the GitHub repository &gt; Select “Get Started” next to ‘Achieved standards’).\nAssign yourself to both issues.\nAdd these issues to the EBP GitHub Project board.\nUpdate references.bib with relevant references.",
+    "text": "Make a private GitHub repository from the Assembly template.\nFill in the README.\nUpdate references.bib with relevant references.\nAdd project details to the project spreadsheet linked in #vr-accessibility-ebp.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Initialization</span>"
     ]
@@ -74,7 +94,7 @@
     "href": "launch.html",
     "title": "3  Analysis",
     "section": "",
-    "text": "3.1 Checklist",
+    "text": "3.1 Checklist\nSequence data has arrived. What next?",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Analysis</span>"
     ]
@@ -94,7 +114,7 @@
     "href": "launch.html#how-to",
     "title": "3  Analysis",
     "section": "3.2 How to:",
-    "text": "3.2 How to:\n\nStructure data\nAll data should be structured in the data/ folder as follows to make data findable.\ndata/\n  | - deliveries\n  | - raw-data\n  | - outputs\n  \\ - frozen\n\ndata/deliveries contains read-only folders of deliveries from the sequencing centers.\ndata/raw-data contains subfolders that indicate the sequence data type, e.g. PacBio-Revio-WGS and within those folders are symlinks to data in subfolders of data/deliveries. Additional data downloaded from other locations should also be in subfolders and include a shell script that can redownload the file from the original location. e.g.,\n#! /usr/bin/env bash\ncurl -O ftp://path/to/public/archive/file.ext\ndata/outputs contains the results from tools lauched in the analyses folders using the same label as the launching folder. e.g., analyses/01_assembly-workflow_initial-run_rackham puts results in data/outputs/01_assembly-workflow_initial-run_rackham.\ndata/frozen contains symlinks to folders in data/outputs which are stage end-points, e.g. the raw-reads have been processed in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in frozen.\n\n\nMake a translation table in data/raw-data linking the NGI delivery files to the data we’re going to use. Need a way to mark bad data.\n\n\n\nAssemble sequence data\n\n\nAnnotate assemblies\n\n\nPerform downstream analyses\n\n\nIntegrate new analyses\n\nNeed a protocol to integrate custom scripts into template while it’s not integrated into the workflow.\n\n\nPut custom code in code/scripts, code/snakemake, code/nextflow, and launch scripts under code/launch_templates.\nMake sure the code uses containers or conda environments to package the software environment.\nMake an issue on the template to integrate the code into the template so that it’s shareable until it’s integrated into a workflow.\nMake an issue on the relevant workflow to integrate the tools.\n\n\n\nTroubleshoot\n\nNeed a protocol for troubleshooting. Who to ask",
+    "text": "3.2 How to:\n\nStructure data\nAll data should be structured in the data/ folder as follows to make data findable.\ndata/\n  | - deliveries\n  | - raw-data\n  | - outputs\n  \\ - frozen\n\ndata/deliveries contains read-only folders of deliveries from the sequencing centers.\ndata/raw-data contains subfolders that indicate the sequence data type, e.g. PacBio-Revio-WGS and within those folders are symlinks to data in subfolders of data/deliveries. Additional data downloaded from other locations should also be in subfolders and include a shell script that can redownload the file from the original location. e.g.,\n#! /usr/bin/env bash\ncurl -O ftp://path/to/public/archive/file.ext\ndata/outputs contains the results from tools lauched in the analyses folders using the same label as the launching folder. e.g., analyses/01_assembly-workflow_initial-run_rackham puts results in data/outputs/01_assembly-workflow_initial-run_rackham.\ndata/frozen contains symlinks to folders in data/outputs which are stage end-points, e.g. the raw-reads have been processed in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in frozen.\n\n\n\nLink data between folders\nData in data/raw-data/* should be symlinked from data/deliveries/**.\nE.g.,\ncd data/raw-data/PacBio-Hifi\nfind ../../deliveries -name \"*.bam\" -o -name \"*.pbi\" -exec ln -s {} . \\;\nand\ncd data/raw-data/Illumina-HiC\nfind ../../deliveries -name \"*.fastq.gz\" -exec ln -s {} . \\;\n\n\nAssemble sequence data\ncd analyses/01_ebp-assembly-workflow\n\nUpdate the assembly_parameters.yml with the paths to input files. Check the YML for a bash snippet to fill out the section.\nUpdate the workflow_parameters.yml with any extra workflow parameters. In particular, check anything marked as TODO, e.g., selecting the mitochondrial code table to use.\nRun the workflow.\n\n./run_nextflow.sh\n\n\n\n\n\n\nNote\n\n\n\nThe workflow above only runs until Hi-C mapping. Steps for manual curation onwards are still being implemented.\n\n\n\n\nAnnotate assemblies\nNo protocols as of yet\n\n\nPerform downstream analyses\nNo protocols as of yet\n\n\nIntegrate new analyses\nCustom analyses might be needed. In these cases please make use of the other project folders, and do your best to version control all the steps.\n\nPut custom code in code/scripts, code/snakemake, and code/nextflow.\nMake sure the code uses containers or conda environments to package the software environment.\nMake an issue on the template to integrate the code into the template so that it’s shareable until it’s integrated into a workflow.\nMake an issue on the relevant workflow to integrate the tools.\n\n\n\nTroubleshoot\nIf you encounter any issues with using these protocols please ask on #vr-accessibility-ebp.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Analysis</span>"
     ]
@@ -114,7 +134,7 @@
     "href": "close.html",
     "title": "5  Closing",
     "section": "",
-    "text": "5.1 Checklist",
+    "text": "5.1 Checklist\nAnalyses have been completed.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Closing</span>"
     ]

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project standard operating procedures - Onboarding</title>
+<title>Onboarding – Project standard operating procedures</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,10 +36,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9020bafcf5558b5681f23e2b5d4cb61e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -67,6 +67,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<meta name="mermaid-theme" content="forest">
 <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
 <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
@@ -80,13 +81,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./preface.html">Onboarding</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -120,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Protocols</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Running assembly projects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -163,7 +164,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#why-do-we-need-these-protocols" id="toc-why-do-we-need-these-protocols" class="nav-link active" data-scroll-target="#why-do-we-need-these-protocols">Why do we need these protocols?</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
   <li><a href="#roles" id="toc-roles" class="nav-link" data-scroll-target="#roles">Roles:</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/NBISweden/assembly-project-template/edit/main/docs/gh-pages/preface.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/assembly-project-template/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -191,10 +193,21 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Here you can find instructions on how to run assembly projects for the VR-EBP, ERGA, and BGE projects.</p>
+<p>To ensure consistent, reproducible, and efficient genome assembly and analysis projects, we’ve established these standard operating procedures (SOPs). By following these guidelines, we aim to optimize our workflows, streamline data management, and facilitate collaboration.</p>
+<section id="why-do-we-need-these-protocols" class="level2">
+<h2 class="anchored" data-anchor-id="why-do-we-need-these-protocols">Why do we need these protocols?</h2>
+<ul>
+<li>To make data findable - (strict folder structure)</li>
+<li>Ease project tracking - (git)</li>
+<li>Reduce workload - (automation, code sharing)</li>
+<li>Reproducibility - (workflows, notebooks, git, documentation, containers, interoperability)</li>
+<li>Documentation - (reporting, summaries, issue tracking)</li>
+</ul>
+</section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
-<p>A Github account is needed. A new member needs to added to the NBISweden Github organisation (Responsible: FIXME), and then to the ERGA assemblies team (Responsible: Martin P.) to access this webpage and template.</p>
-<p>New members also need to be added to the NAISS compute and storage allocations in SUPR (Responsible: Henrik).</p>
+<p>A Github account is needed. A new member needs to added to the NBISweden Github organisation (ask on #technical-operations), and then to the ERGA assemblies team (Responsible: Martin P.).</p>
+<p>New members also need to be added to the NAISS compute and storage allocations in SUPR (Responsible: Henrik / Mahesh).</p>
 <p>Life-cyle:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -224,11 +237,11 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Lead: Henrik (NBIS), Lucile (NBIS)</li>
 <li>Sequencer: Ignas (NGI), Christian (NGI)</li>
-<li>Assembler: Martin P. (NBIS), Mahesh (NBIS), André (NBIS), Guilherme (NBIS), Estelle (NBIS)</li>
+<li>Assembler: Martin P. (NBIS), Mahesh (NBIS), André (NBIS), Guilherme (NBIS), Estelle (NBIS), Tomas (NBIS)</li>
 <li>Annotator: Lucile (NBIS), André (NBIS), Guilherme (NBIS), Martin P. (NBIS)</li>
-<li>Steward: Stephan (NBIS)</li>
+<li>Steward: Stephan (NBIS), Yvonne (NBIS)</li>
 <li>Analyst: André (NBIS), Guilherme (NBIS)</li>
-<li>Developer: Mahesh (NBIS)</li>
+<li>Developer: Mahesh (NBIS), Martin P.(NBIS)</li>
 <li>Monitor: Mahesh (NBIS)</li>
 </ul>
 <div class="cell" data-layout-align="default">
@@ -260,14 +273,15 @@ ul.task-list li input[type="checkbox"] {
 <section id="who-to-talk-to" class="level3">
 <h3 class="anchored" data-anchor-id="who-to-talk-to">Who to talk to:</h3>
 <ul>
-<li>Add to Github organisation: FIXME</li>
+<li>Add to Github organisation: #technical-operations</li>
 <li>Add to Github team: Martin P.</li>
-<li>Add to NAISS compute allocation: Henrik</li>
-<li>Add to NAISS storage allocation: Henrik</li>
+<li>Add to NAISS compute allocation: Henrik / Mahesh</li>
+<li>Add to NAISS storage allocation: Henrik / Mahesh</li>
 <li>How to use the template: Mahesh</li>
 <li>Code review: Mahesh</li>
 <li>Protocol review: Mahesh</li>
 <li>Disk space issues: Entire team</li>
+<li>Anything else: #vr-accessibility-ebp</li>
 </ul>
 
 
@@ -310,18 +324,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -353,7 +356,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -388,7 +429,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -436,7 +481,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -666,8 +710,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./index.html" class="pagination-link" aria-label="Protocols">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Protocols</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./index.html" class="pagination-link" aria-label="Running assembly projects">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Running assembly projects</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
