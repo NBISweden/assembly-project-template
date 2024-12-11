@@ -25,7 +25,9 @@ format:
   html:
     toc-depth: 2
     number-depth: 2
-    theme: sketchy
+    theme: minty
+    mermaid:
+      theme: forest
 
 bibliography: references.bib
 

@@ -1,18 +1,6 @@
-# Protocols
+# Running assembly projects
 
-To ensure consistent, reproducible, and efficient genome assembly and analysis projects, we've 
-established these standard operating procedures (SOPs). By following these guidelines, we aim to 
-optimize our workflows, streamline data management, and facilitate collaboration.
-
-If you're new to these protocols, please see the [onboarding material](preface) first.
-
-## Why do we need these protocols?
-
-- To make data findable - (strict folder structure)
-- Ease project tracking - (git)
-- Reduce workload - (automation, code sharing)
-- Reproducibility - (workflows, notebooks, git, documentation, containers, interoperability)
-- Documentation - (reporting, summaries, issue tracking)
+If you're new to these protocols, please see the [onboarding material](preface.qmd) first.
 
 ## Quick Start
 
@@ -39,10 +27,10 @@ If you're new to these protocols, please see the [onboarding material](preface) 
   ```
 - Update README in the repository with project details.
 - Add references to references.bib of important information.
-- Copy NGI deliveries to data folder (see [launch page](launch)).
+- Copy NGI deliveries to data folder (see [launch page](launch.qmd)).
 - Link relevant raw data in `data/raw-data`.
 - Update `assembly_parameters.yml` to point to files in `data/raw-data`.
-- Run analyses, activating any necessary compute environments. 
+- Run analyses (`./run_nextflow.sh`)
 - Refer to the other pages here for more in-depth descriptions of the protocols.
 
 The template provides an organised folder structure, and skeleton files to quickly
@@ -50,3 +38,31 @@ start analyzing.
 
 Analyses are primarily run on Uppmax or PDC. Github is used as the primary repository, and
 analysis files should be tracked and pushed regularly.
+
+## Running a test assembly analysis
+
+Follow the steps above to make a repository for a test species. If you would like to use real data
+then feel free to use [Laetiporus sulphureus (Chicken of the Woods)](https://portal.darwintreeoflife.org/data/root/details/Laetiporus%20sulphureus).
+
+From the Data tab, download the bam file for PacBio HiFi into the deliveries folder:
+
+```{.bash}
+wget ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR680/ERR6808041/m64229e_210602_121910.ccs.bc1020_BAK8B_OA--bc1020_BAK8B_OA.bam
+```
+
+and the FastQ files for HiC (Arima v2) into the deliveries folder:
+
+```{.bash}
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR668/000/ERR6688740/ERR6688740_1.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR668/000/ERR6688740/ERR6688740_2.fastq.gz
+```
+
+Symlink the files into appropriate folders under `raw-data`.
+
+Then edit the `assembly_parameters.yml` to point to the data linked under `raw-data`, using
+the bash snippets in the `assembly_parameters.yml` to help you write the input file.
+
+Update the `workflow_parameters.yml` and change the `mitohifi.code` parameter to 4 
+(see [NCBI Taxonomy Browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=5630)).
+
+Finally, open a `screen` session and then run the launch script (`./run_nextflow.sh`).

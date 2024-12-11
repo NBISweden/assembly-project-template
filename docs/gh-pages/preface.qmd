@@ -1,7 +1,19 @@
 # Onboarding {.unnumbered}
 
-Here you can find instructions on how to run assembly projects
-for the VR-EBP, ERGA, and BGE projects.
+Here you can find instructions on how to run assembly projects for the VR-EBP, ERGA, and BGE 
+projects.
+
+To ensure consistent, reproducible, and efficient genome assembly and analysis projects, we've 
+established these standard operating procedures (SOPs). By following these guidelines, we aim to 
+optimize our workflows, streamline data management, and facilitate collaboration.
+
+## Why do we need these protocols?
+
+- To make data findable - (strict folder structure)
+- Ease project tracking - (git)
+- Reduce workload - (automation, code sharing)
+- Reproducibility - (workflows, notebooks, git, documentation, containers, interoperability)
+- Documentation - (reporting, summaries, issue tracking)
 
 ## Getting started
 

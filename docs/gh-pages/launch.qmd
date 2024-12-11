@@ -40,7 +40,7 @@ data/
 - `data/frozen` contains symlinks to folders in `data/outputs` which are stage end-points, e.g. the raw-reads have been processed
   in various ways, and after looking at QC controls, one folder is selected to be used for assembly. This is symlinked in frozen.
 
-## Link data between folders
+### Link data between folders
 
 Data in `data/raw-data/*` should be symlinked from `data/deliveries/**`. 
 
