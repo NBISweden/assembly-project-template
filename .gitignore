@@ -8,6 +8,10 @@ data/frozen/*/
 nobackup/
 nxf-work/
 
+# Pipeline files
+results/
+*_cache/
+
 # Common bioinformatic file formats
 *.sam
 *.bam
@@ -33,9 +37,17 @@ nxf-work/
 *.ped
 *.map
 
+# Pixi files
+.pixi/
+*.egg-info
+
 # Nextflow files
 .nextflow*
 work/
+
+# nf-test files
+.nf-test.log
+.nf-test/
 
 # Quarto files
 .quarto/
@@ -45,5 +57,6 @@ _book/
 
 # misc
 .DS_Store
+.screenrc
 slurm*.out
 slurm*.err
