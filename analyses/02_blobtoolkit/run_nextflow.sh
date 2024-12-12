@@ -26,8 +26,10 @@ function run_nextflow {
     export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
 
     # Activate shared Nextflow environment
+    set +u
     eval "$(conda shell.bash hook)"
     conda activate "${STORAGEALLOC}/conda/nextflow-env"
+    set -u
 
     # Clean results folder if last run resulted in error
     if [ "$( nextflow log | awk -F $'\t' '{ last=$4 } END { print last }' )" == "ERR" ]; then
