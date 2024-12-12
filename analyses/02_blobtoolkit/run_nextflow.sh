@@ -75,4 +75,5 @@ else
     exit 1
 fi
 
-
+# Print git status to remind users to checkin untracked/updated files
+git status
