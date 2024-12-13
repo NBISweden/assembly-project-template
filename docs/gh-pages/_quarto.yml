@@ -16,7 +16,7 @@ book:
     - launch.qmd
     - monitor.qmd
     - close.qmd
-    - faq.md
+    - faq.qmd
     - references.qmd
   repo-url: https://github.com/NBISweden/assembly-project-template
   repo-actions: [edit, issue]
