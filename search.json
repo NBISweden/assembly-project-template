@@ -148,5 +148,25 @@
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Closing</span>"
     ]
+  },
+  {
+    "objectID": "faq.html",
+    "href": "faq.html",
+    "title": "6  FAQ",
+    "section": "",
+    "text": "6.1 Nextflow related",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>FAQ</span>"
+    ]
+  },
+  {
+    "objectID": "faq.html#nextflow-related",
+    "href": "faq.html#nextflow-related",
+    "title": "6  FAQ",
+    "section": "",
+    "text": "Do I need to activate an environment to run the pipeline?\n\n\n\n\n\nNo, the run_nextflow.sh script should automatically load the environment for you.\n\n\n\n\n\n\n\n\n\nHow do I change resources (cpu, memory, time) for a workflow?\n\n\n\n\n\nIf you want to change the resources requested by a Nextflow process, update the nextflow.config in your launch directory (where you run nextflow). Configuration process selectors are used to select which processes to change resources for. The label for withName: can be the simple process name (e.g., MERYL_COUNT), the full process name (e.g., BUILD_MERYL_HIC_DATABASE:MERYL_COUNT), or a java/groovy regular expression (e.g., .*:MERYL_COUNT).\nExample:\nprocess {\n  withName: `BUILD_MERYL_HIC_DATABASE:MERYL_COUNT` {\n    cpus   = 50\n    memory = 250.GB\n    time   = 1.d\n  }\n}\n\n\n\n\n\n\n\n\n\nHow do I change optional command-line interface (cli) parameters to tools?\n\n\n\n\n\nParameters for tools in Nextflow processes are either provided as process input:, or using the ext.args process directive, following the style of nf-core. Mandatory files, Optional files, and mandatory values for running a tool are supplied through process input: in which case there will be a corresponding workflow parameter to supply them if they’re user configurable. In other cases, there are optional command-line flags that could be provided. These are supplied using the process directive ext.args in the nextflow.config in your launch directory.\nExample:\nprocess {\n  withName: `BUILD_MERYL_HIC_DATABASE:MERYL_COUNT` {\n    ext.args = '-v'\n  }\n}",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>FAQ</span>"
+    ]
   }
 ]
