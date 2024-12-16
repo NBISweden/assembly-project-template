@@ -12,13 +12,13 @@ function get_cluster_name {
 }
 
 function run_nextflow {
-    PROFILE="${PROFILE:-$1}"                    # Profile to use (values: uppmax, dardel)
+    PROFILE="${PROFILE:-$1}"                    # Profile to use (values: uppmax, dardel, nac)
     STORAGEALLOC="$2"                           # NAISS storage allocation (path)
     WORKDIR="${PWD/analyses/nobackup}/nxf-work" # Nextflow work directory
     RESULTS="${PWD/analyses/data/outputs}"      # Path to store results from Nextflow
 
     # Path to Nextflow script. Pulls from Github
-    SCRIPT="${SCRIPT:-sanger-tol/blobtoolkit/main.nf}"
+    WORKFLOW="${WORKFLOW:-sanger-tol/blobtoolkit}"
     # Workflow version or branch to use (default: main)
     BRANCH="${BRANCH:-main}"
 
@@ -37,10 +37,15 @@ function run_nextflow {
         rm -rf "$RESULTS"
     fi
 
-    # Run Nextflow
-    nextflow run "$SCRIPT" \
-        -r "$BRANCH" \
-        -latest \
+    # Use latest version of branch if not using local file
+    REMOTE_OPTS=""
+    if ! test -f "$WORKFLOW"; then
+        REMOTE_OPTS="-r $BRANCH -latest"
+    fi
+
+    # Run nextflow 
+    nextflow run "$WORKFLOW" \
+        $REMOTE_OPTS \
         -profile "$PROFILE" \
         -work-dir "$WORKDIR" \
         -resume \
@@ -75,5 +80,5 @@ else
     exit 1
 fi
 
-# Print git status to remind users to checkin untracked/updated files
+# Print git status to remind users to check in untracked/updated files
 git status
