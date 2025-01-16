@@ -1,0 +1,35 @@
+[project]
+authors = ["Mahesh Binzer-Panchal <mahesh.binzer-panchal@nbis.se>"]
+channels = ["conda-forge", "bioconda"]
+description = "Assembly template (TODO)"
+name = "assembly-project-template"
+platforms = ["linux-64", "osx-arm64"]
+version = "1.0.0"
+
+[dependencies]
+# Empty because we don't want to install quarto or nextflow by default.
+
+[tasks]
+# Fetch manual curation folders locally (assumes you git cloned the repo from HPC)
+fetch-curation = "rsync -av \"$(git remote get-url origin)/data/outputs/01_ebp-assembly-workflow/{08_rapid_curation,10_report}\" data/outputs/01_ebp-assembly-workflow/"
+# Template updates
+git-link-template = "git remote add template https://github.com/NBISweden/assembly-project-template"
+git-merge-template = "git fetch template && git merge template/main --allow-unrelated-histories"
+
+[feature.quarto-env.dependencies]
+quarto = "*"
+
+[feature.quarto-env.tasks]
+make-preview  = { cmd = "quarto preview", cwd = "docs/gh-pages" }
+make-gh-pages = { cmd = "quarto publish gh-pages --no-browser --no-prompt", cwd = "docs/gh-pages" }
+
+[feature.nextflow-env.dependencies]
+nextflow = "*"
+
+[feature.nextflow-env.tasks]
+# Run Assembly
+run-assembly = { cmd = "run_nextflow.sh", cwd = "analyses/01_ebp-assembly-workflow/" }
+
+[environments]
+nextflow-env = [ "nextflow-env" ]
+quarto-env = [ "quarto-env" ]
