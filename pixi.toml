@@ -28,7 +28,7 @@ nextflow = "*"
 
 [feature.nextflow-env.tasks]
 # Run Assembly
-run-assembly = { cmd = "run_nextflow.sh", cwd = "analyses/01_ebp-assembly-workflow/" }
+assembly = { cmd = "run_nextflow.sh", cwd = "analyses/01_ebp-assembly-workflow/" }
 
 [environments]
 nextflow-env = [ "nextflow-env" ]
