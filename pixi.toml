@@ -11,7 +11,20 @@ version = "1.0.0"
 
 [tasks]
 # Fetch manual curation folders locally (assumes you git cloned the repo from HPC)
-fetch-curation = "rsync -av \"$(git remote get-url origin)/data/outputs/01_ebp-assembly-workflow/{08_rapid_curation,10_report}\" data/outputs/01_ebp-assembly-workflow/"
+fetch-curation = {
+    cmd = [
+        "rsync",
+        "-av",
+        $SSH_OPTS,
+        "\"$(git remote get-url $ORIGIN)/data/outputs/01_ebp-assembly-workflow/{08_rapid_curation,10_report}\"",
+        "data/outputs/01_ebp-assembly-workflow/"
+    ],
+    env = {
+        SSH_OPTS = "",
+        ORIGIN = "origin"
+    }
+}
+
 # Template updates
 git-link-template = "git remote add template https://github.com/NBISweden/assembly-project-template"
 git-merge-template = "git fetch template && git merge template/main --allow-unrelated-histories"
