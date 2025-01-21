@@ -15,12 +15,12 @@ fetch-curation = {
     cmd = [
         "rsync",
         "-av",
-        $SSH_OPTS,
+        "$SSH_OPTS",
         "\"$(git remote get-url $ORIGIN)/data/outputs/01_ebp-assembly-workflow/{08_rapid_curation,10_report}\"",
         "data/outputs/01_ebp-assembly-workflow/"
     ],
     env = {
-        SSH_OPTS = "",
+        SSH_OPTS = "", # Usage: SSH_OPTS='-e "ssh -J rackham"' pixi run fetch-curation
         ORIGIN = "origin"
     }
 }
