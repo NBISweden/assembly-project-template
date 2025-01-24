@@ -10,12 +10,15 @@ version = "1.0.0"
 # Empty because we don't want to install quarto or nextflow by default.
 
 [tasks]
+help = "cat README.md"
 # Usage: e.g., 
 #   SSH_OPTS='-e "ssh -J rackham"' pixi run fetch-curation
 # Fetch qc folders locally (assumes you git cloned the repo from HPC)
 fetch-qc = { cmd = "rsync -av $SSH_OPTS \"$(git remote get-url $ORIGIN)/data/outputs/01_ebp-assembly-workflow/01_read_inspection\" \"data/outputs/01_ebp-assembly-workflow/\"", env = { ORIGIN = "", SSH_OPTS = "" } }
 # Fetch manual curation folders locally (assumes you git cloned the repo from HPC)
-fetch-curation = { cmd = "rsync -av $SSH_OPTS \"$(git remote get-url $ORIGIN)/data/outputs/01_ebp-assembly-workflow/{08_rapid_curation,10_report}\" \"data/outputs/01_ebp-assembly-workflow/\"", env = { SSH_OPTS = "", ORIGIN = "origin" } }
+fetch-curation = { cmd = "rsync -av $SSH_OPTS \"$(git remote get-url $ORIGIN)/data/outputs/01_ebp-assembly-workflow/08_rapid_curation\" \"data/outputs/01_ebp-assembly-workflow/\"", env = { SSH_OPTS = "", ORIGIN = "origin" } }
+# Fetch report folder locally (assumes you git cloned the repo from HPC)
+fetch-report = { cmd = "rsync -av $SSH_OPTS \"$(git remote get-url $ORIGIN)/data/outputs/01_ebp-assembly-workflow/10_report\" \"data/outputs/01_ebp-assembly-workflow/\"", env = { SSH_OPTS = "", ORIGIN = "origin" } }
 
 # Template updates
 git-link-template = "git remote add template https://github.com/NBISweden/assembly-project-template"
