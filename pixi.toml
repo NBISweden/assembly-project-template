@@ -39,6 +39,15 @@ nextflow = "*"
 [feature.nextflow-env.tasks]
 # Run Assembly
 assembly = { cmd = "run_nextflow.sh", cwd = "analyses/01_ebp-assembly-workflow/" }
+# General
+nextflow = "cd $INIT_CWD && ./run_nextflow.sh"
+# Clean up
+clean-work = "cd $INIT_CWD && nextflow clean -f -before $(nextflow log -q | tail -n 1) && find work/ -type d -empty -delete"
+clean-nf = "cd $INIT_CWD && rm -rf .nextflow* work/"
+clean-results = "cd $INIT_CWD && rm -rf results/"
+clean-nftest = "cd $INIT_CWD && rm -rf .nf-test/"
+clean-all = { depends-on = [ "clean-nf", "clean-results", "clean-nftest" ] }
+
 
 [environments]
 nextflow-env = ["nextflow-env"]
