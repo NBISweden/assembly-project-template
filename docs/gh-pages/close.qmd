@@ -2,7 +2,7 @@
 
 Analyses have been completed.
 
-## Checklist
+## Checklist to close a project
 
 - [ ] The results have been discussed with the team.
 - [ ] README.md in the root of the project is up to date.
@@ -18,6 +18,14 @@ Analyses have been completed.
 - [ ] The Github repository is up-to-date with the latest tracked files.
 - [ ] All files have data provenance (e.g. where data was downloaded from).
 - [ ] If this is a BGE Project, the information has been submitted to the BGE tracking tool and is up-to-date (Contact: Henrik).
-- [ ] Data has been delivered to PI.
 - [ ] Nextflow cache has been cleaned.
 - [ ] Results have been appropriately archived.
+
+## Checklist for removing data from HPC
+
+- [ ] Raw data has been uploaded to/published in a(n external) repository
+- [ ] PI has been offered/reminded to download raw data locally, and has responded
+- [ ] All data have been checked to be in the latest version, and updates (e.g. to an assembly) have been made when applicable
+- [ ] Removal decision has been made and approved by all parties (NBIS and PI)
+- [ ] Intermediate and temporary analysis files have been removed
+- [ ] Data has been removed
