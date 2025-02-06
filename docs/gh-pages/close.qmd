@@ -2,7 +2,7 @@
 
 Analyses have been completed.
 
-## Checklist closing
+## Checklist to close a project
 
 - [ ] The results have been discussed with the team.
 - [ ] README.md in the root of the project is up to date.
@@ -21,7 +21,7 @@ Analyses have been completed.
 - [ ] Nextflow cache has been cleaned.
 - [ ] Results have been appropriately archived.
 
-## Checklist removal
+## Checklist for removing data from HPC
 
 - [ ] Raw data has been uploaded to/published in a(n external) repository
 - [ ] PI has been offered/reminded to download raw data locally, and has responded
