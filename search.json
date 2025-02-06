@@ -134,17 +134,27 @@
     "href": "close.html",
     "title": "5  Closing",
     "section": "",
-    "text": "5.1 Checklist\nAnalyses have been completed.",
+    "text": "5.1 Checklist to close a project\nAnalyses have been completed.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Closing</span>"
     ]
   },
   {
-    "objectID": "close.html#checklist",
-    "href": "close.html#checklist",
+    "objectID": "close.html#checklist-to-close-a-project",
+    "href": "close.html#checklist-to-close-a-project",
     "title": "5  Closing",
     "section": "",
-    "text": "The results have been discussed with the team.\nREADME.md in the root of the project is up to date.\nSequence deliveries are in data/deliveries.\nRaw data is in data/raw-data on rackham.\nAnalysis results are in data/outputs on rackham.\nFrozen outputs/results are in data/frozen on rackham.\nanalyses/History.md is up-to-date with the relationship between analyses.\nAnalysis folders names include where the analysis was run.\nGit has been used to track the latest executed version of the analyses.\nAll code used is present in the repository.\nAn up-to-date finalized report is present in docs/report.\nThe Github repository is up-to-date with the latest tracked files.\nAll files have data provenance (e.g. where data was downloaded from).\nIf this is a BGE Project, the information has been submitted to the BGE tracking tool and is up-to-date (Contact: Henrik).\nData has been delivered to PI.\nNextflow cache has been cleaned.\nResults have been appropriately archived.",
+    "text": "The results have been discussed with the team.\nREADME.md in the root of the project is up to date.\nSequence deliveries are in data/deliveries.\nRaw data is in data/raw-data on rackham.\nAnalysis results are in data/outputs on rackham.\nFrozen outputs/results are in data/frozen on rackham.\nanalyses/History.md is up-to-date with the relationship between analyses.\nAnalysis folders names include where the analysis was run.\nGit has been used to track the latest executed version of the analyses.\nAll code used is present in the repository.\nAn up-to-date finalized report is present in docs/report.\nThe Github repository is up-to-date with the latest tracked files.\nAll files have data provenance (e.g. where data was downloaded from).\nIf this is a BGE Project, the information has been submitted to the BGE tracking tool and is up-to-date (Contact: Henrik).\nNextflow cache has been cleaned.\nResults have been appropriately archived.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Closing</span>"
+    ]
+  },
+  {
+    "objectID": "close.html#checklist-for-removing-data-from-hpc",
+    "href": "close.html#checklist-for-removing-data-from-hpc",
+    "title": "5  Closing",
+    "section": "5.2 Checklist for removing data from HPC",
+    "text": "5.2 Checklist for removing data from HPC\n\nRaw data has been uploaded to/published in a(n external) repository\nPI has been offered/reminded to download raw data locally, and has responded\nAll data have been checked to be in the latest version, and updates (e.g. to an assembly) have been made when applicable\nRemoval decision has been made and approved by all parties (NBIS and PI)\nIntermediate and temporary analysis files have been removed\nData has been removed",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Closing</span>"
     ]
