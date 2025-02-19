@@ -32,7 +32,7 @@ Assembly:
 /path/to/assembly/for/submission
 ```
 
-- [ ] An EAR report has been made.
+- [ ] An [EAR report](https://github.com/ERGA-consortium/EARs) has been made.
 - [ ] The data stewards have been given the path to the finished assembly.
 - [ ] The paths to all data used in the assembly is recorded above in this file.
 
