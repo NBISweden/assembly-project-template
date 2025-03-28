@@ -53,3 +53,14 @@ process {
 ```
 
 :::
+
+::: {.callout-tip collapse="true" icon=false}
+## How do I use an other branch than the main to run the pipeline?
+If you want to test a pull request that was done on https://github.com/NBISweden/Earth-Biogenome-Project-pilot, you can do :
+Example :
+```
+BRANCH=update_report ./run_nextflow.sh
+```
+
+:::
+
