@@ -25,11 +25,13 @@ function run_nextflow {
     # Set common path to store all Singularity containers
     export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
 
-    # Activate shared Nextflow environment
-    set +u
-    eval "$(conda shell.bash hook)"
-    conda activate "${STORAGEALLOC}/conda/nextflow-env"
-    set -u
+    # Activate shared Nextflow environment unless in Pixi
+    if [ "${PIXI_IN_SHELL:-0}" -eq 0 ]; then
+        set +u
+        eval "$(conda shell.bash hook)"
+        conda activate "${STORAGEALLOC}/conda/nextflow-env"
+        set -u
+    fi
 
     # Clean results folder if last run resulted in error
     if [ "$( nextflow log | awk -F $'\t' '{ last=$4 } END { print last }' )" == "ERR" ]; then
