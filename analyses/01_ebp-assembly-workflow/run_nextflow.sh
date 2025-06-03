@@ -40,8 +40,9 @@ function run_nextflow {
     set -u
 
     # Clean results folder if last run resulted in error
-    # Column 4 (STATUS is also space padded, hence the tr -d " ")
-    if test "$( nextflow log | tail -n 1 | cut -f 4 | tr -d " " )" != "OK"; then
+    # Column 4 = STATUS is also space padded, hence the tr -d " "
+    # possible STATUS values: "" - first run, "-" - manually cancelled/killed, "OK", "ERR"
+    if test "$( nextflow log | tail -n 1 | cut -f 4 | tr -d " " )" == "ERR"; then
         echo "WARN: Cleaning results folder due to previous error" >&2
         rm -rf "$RESULTS"
         # Clean cache to prevent build up of failed run work directories
