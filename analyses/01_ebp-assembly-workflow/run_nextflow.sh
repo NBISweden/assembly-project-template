@@ -11,6 +11,14 @@ function get_cluster_name {
     fi
 }
 
+function clean_nextflow_cache {
+    local WORKDIR=$1  # Path to Nextflow work directory
+    # Clean up Nextflow cache to remove unused files
+    nextflow clean -f -before "$( nextflow log -q | tail -n 1 )"
+    # Clean up empty work directories
+    find "$WORKDIR" -type d -empty -delete
+}
+
 function run_nextflow {
     PROFILE="${PROFILE:-$1}"                    # Profile to use (values: uppmax, dardel, nac)
     STORAGEALLOC="$2"                           # NAISS storage allocation (path)
@@ -32,9 +40,13 @@ function run_nextflow {
     set -u
 
     # Clean results folder if last run resulted in error
-    if [ "$( nextflow log | awk -F $'\t' '{ last=$4 } END { print last }' )" == "ERR" ]; then
+    # Column 4 = STATUS is also space padded, hence the tr -d " "
+    # possible STATUS values: "" - first run, "-" - manually cancelled/killed, "OK", "ERR"
+    if test "$( nextflow log | tail -n 1 | cut -f 4 | tr -d " " )" == "ERR"; then
         echo "WARN: Cleaning results folder due to previous error" >&2
         rm -rf "$RESULTS"
+        # Clean cache to prevent build up of failed run work directories
+        clean_nextflow_cache "$WORKDIR"
     fi
 
     # Use latest version of branch if not using local file
@@ -43,7 +55,7 @@ function run_nextflow {
         REMOTE_OPTS="-r $BRANCH -latest"
     fi
 
-    # Run nextflow 
+    # Run nextflow
     nextflow run "$WORKFLOW" \
         $REMOTE_OPTS \
         -profile "$PROFILE" \
@@ -54,12 +66,7 @@ function run_nextflow {
         --cache "${STORAGEALLOC}/nobackup/database-cache" \
         --outdir "$RESULTS"
 
-    # Clean up Nextflow cache to remove unused files
-    nextflow clean -f -before "$( nextflow log -q | tail -n 1 )"
-    # Clean up empty work directories
-    find "$WORKDIR" -type d -empty -delete
-    # Use `nextflow log` to see the time and state of the last nextflow executions.
-
+    clean_nextflow_cache "$WORKDIR"
 }
 
 # Detect cluster name ( rackham, dardel )
@@ -77,7 +84,7 @@ elif [ "$cluster" == "dardel" ]; then
 elif [ "$cluster" == "nac" ]; then
     module load Singularity
     run_nextflow nac /projects/earth_biogenome_project/
-else 
+else
     echo "Error: unrecognised cluster '$cluster'." >&2
     exit 1
 fi
