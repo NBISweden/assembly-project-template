@@ -7,7 +7,7 @@ function get_cluster_name {
         # Only return cluster names we're catering for
         sacctmgr show cluster -P -n \
         | cut -f1 -d'|' \
-        | grep "rackham\|dardel\|nac"
+        | grep "rackham\|dardel\|nac\|pelle"
     fi
 }
 
@@ -20,7 +20,7 @@ function clean_nextflow_cache {
 }
 
 function run_nextflow {
-    PROFILE="${PROFILE:-$1}"                    # Profile to use (values: uppmax, dardel, nac)
+    PROFILE="${PROFILE:-$1}"                    # Profile to use (values: uppmax, dardel, nac, pelle)
     STORAGEALLOC="$2"                           # NAISS storage allocation (path)
     WORKDIR="${PWD/analyses/nobackup}/nxf-work" # Nextflow work directory
     RESULTS="${PWD/analyses/data/outputs}"      # Path to store results from Nextflow
@@ -84,6 +84,8 @@ elif [ "$cluster" == "dardel" ]; then
 elif [ "$cluster" == "nac" ]; then
     module load Singularity
     run_nextflow nac /projects/earth_biogenome_project/
+elif [ "$cluster" == "pelle" ]; then
+    run_nextflow pelle /proj/snic2021-6-194
 else
     echo "Error: unrecognised cluster '$cluster'." >&2
     exit 1
