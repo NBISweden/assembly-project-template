@@ -1,6 +1,6 @@
 project: 'naiss2023-5-307'
 input: 'assembly_parameters.yml'
-steps: 'inspect,preprocess,assemble,screen,purge'
+steps: 'inspect,preprocess,assemble,screen,purge,scaffold'
 # hifiasm: # Optional, default = no extra options: Key (e.g. 'opts01') is used in assembly build name (e.g., 'hifiasm-raw-opts01').
 #   opts01: "--opts A"
 #   opts02: "--opts B"
