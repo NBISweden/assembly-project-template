@@ -1,0 +1,11 @@
+[workspace]
+authors = ["Mahesh Binzer-Panchal <mahesh.binzer-panchal@nbis.se>"]
+channels = ["conda-forge", "bioconda"]
+description = "A de novo assembly project for <Species/Strain>"
+name = "De novo assembly project"
+platforms = ["linux-64", "osx-arm64"]
+version = "1.0.0"
+
+[tasks]
+
+[dependencies]

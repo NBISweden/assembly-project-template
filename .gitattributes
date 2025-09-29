@@ -3,3 +3,6 @@ docs/* linguist-detectable=false
 *.css linguist-detectable=false
 *.js linguist-detectable=false
 *.tex linguist-detectable=false
+
+# SCM syntax highlighting & preventing 3-way merges
+pixi.lock merge=binary linguist-language=YAML linguist-generated=true
