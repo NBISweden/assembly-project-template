@@ -7,5 +7,96 @@ platforms = ["linux-64", "osx-arm64"]
 version = "1.0.0"
 
 [tasks]
+help = "cat README.md"
+
+# Template updates
+git-link-template = "git remote add template https://github.com/NBISweden/assembly-project-template"
+# git-merge-template = "git fetch template && git merge template/main --allow-unrelated-histories"
+git-link-hpc = { cmd = "git remote add hpc {{ hpc_repo }}", args = ["hpc_repo"] }
+
+# Usage examples:
+#   pixi run fetch-report
+#   OR
+#   pixi run fetch-report '-e "ssh -J rackham"'
+# fetch-stats = { cmd = "rsync -av --max-size=20M {{ opts }} \"$(git remote get-url hpc)/data/outputs/01_ebp-assembly-workflow/{03_assembly,04_contamination_screen,05_duplicate_purging,07_scaffolding}\" \"data/outputs/01_ebp-assembly-workflow/\"", args = [ { arg = "opts", default = ""} ] }
+[tasks.fetch-qc]
+args = [
+    { arg = "opts", default = "" }
+]
+cmd = """
+rsync -av {{ opts }} \
+"$(git remote get-url hpc)/data/outputs/01_ebp-assembly-workflow/01_read_inspection" \
+"data/outputs/01_ebp-assembly-workflow/"
+"""
+
+[tasks.fetch-report]
+args = [
+    { arg = "opts", default = "" }
+]
+cmd = """
+rsync -av {{ opts }} \
+"$(git remote get-url hpc)/data/outputs/01_ebp-assembly-workflow/10_report" \
+"data/outputs/01_ebp-assembly-workflow/"
+"""
+
+[tasks.fetch-scaffolded]
+args = [
+    { arg = "opts", default = "" }
+]
+cmd = """
+rsync -av {{ opts }} \
+"$(git remote get-url hpc)/data/outputs/01_ebp-assembly-workflow/07_scaffolding/yahs" \
+"data/outputs/01_ebp-assembly-workflow/07_scaffolding/"
+"""
+
+[tasks.fetch-map]
+args = [
+    { arg = "opts", default = "" }
+]
+cmd = """
+rsync -av {{ opts }} \
+"$(git remote get-url hpc)/data/outputs/02_curationpretext/pretext*" \
+"data/outputs/02_curationpretext/"
+"""
+
+[tasks.sync-to-hpc]
+args = [
+    { arg = "opts", default = "" }
+]
+cmd = """
+rsync -av --ignore-existing {{ opts }} \
+"data/outputs" \
+"$(git remote get-url hpc)/data/"
+"""
 
 [dependencies]
+rsync = ">=3.4.1,<4"
+
+[feature.quarto.dependencies]
+quarto = ">=1.8"
+
+[feature.quarto.tasks]
+make-preview = { cmd = "quarto preview", cwd = "docs/gh-pages" }
+make-gh-pages = { cmd = "quarto publish gh-pages --no-browser --no-prompt", cwd = "docs/gh-pages" }
+
+[feature.nextflow.dependencies]
+nextflow = ">=25.4.5"
+
+[feature.nextflow.tasks]
+# Run Assembly
+assembly = { cmd = "run_nextflow.sh", cwd = "analyses/01_ebp-assembly-workflow/" }
+# General
+nextflow = "cd $INIT_CWD && ./run_nextflow.sh"
+# Clean up
+clean-work = "cd $INIT_CWD && nextflow clean -f -before $(nextflow log -q | tail -n 1) && find work/ -type d -empty -delete"
+
+[feature.sanger-curation-utils.dependencies]
+python = ">=3.10"
+
+[feature.sanger-curation-utils.pypi-dependencies]
+tola-agp-tpf-utils = { git = "https://github.com/sanger-tol/agp-tpf-utils" }
+
+[environments]
+nextflow = ["nextflow"]
+quarto = ["quarto"]
+curation = ["sanger-curation-utils"]
