@@ -33,11 +33,13 @@ function run_nextflow {
     # Set common path to store all Singularity containers
     export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
 
-    # Activate shared Nextflow environment
-    set +u
-    eval "$(conda shell.bash hook)"
-    conda activate "${STORAGEALLOC}/conda/nextflow-env"
-    set -u
+    # Activate shared Nextflow environment unless in a Pixi env
+    if [ -z "${PIXI_ENVIRONMENT_NAME:-}" ]; then
+        set +u
+        eval "$(conda shell.bash hook)"
+        conda activate "${STORAGEALLOC}/conda/nextflow-env"
+        set -u
+    fi
 
     # Clean results folder if last run resulted in error
     # Column 4 = STATUS is also space padded, hence the tr -d " "

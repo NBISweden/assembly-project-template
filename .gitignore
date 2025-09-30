@@ -38,8 +38,8 @@ results/
 *.map
 
 # Pixi files
-.pixi/
-*.egg-info
+.pixi/*
+!.pixi/config.toml
 
 # Nextflow files
 .nextflow*
