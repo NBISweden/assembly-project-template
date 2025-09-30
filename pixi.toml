@@ -7,8 +7,6 @@ platforms = ["linux-64", "osx-arm64"]
 version = "1.0.0"
 
 [tasks]
-help = "cat README.md"
-
 # Template updates
 git-link-template = "git remote add template https://github.com/NBISweden/assembly-project-template"
 # git-merge-template = "git fetch template && git merge template/main --allow-unrelated-histories"
