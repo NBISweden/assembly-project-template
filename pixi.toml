@@ -87,6 +87,8 @@ assembly = { cmd = "run_nextflow.sh", cwd = "analyses/01_ebp-assembly-workflow/"
 nextflow = "cd $INIT_CWD && ./run_nextflow.sh"
 # Clean up
 clean-work = "cd $INIT_CWD && nextflow clean -f -before $(nextflow log -q | tail -n 1) && find work/ -type d -empty -delete"
+# Check slurm jobs since start time (default: last 3 days)
+check-slurm = { cmd = "sacct -X --user=$USER -S {{ start_time }} --format=JobID,JobName,State,ExitCode,Start,End -n -p", args = [ { arg = "start_time", default = "now-3days" } ] }
 
 [feature.sanger-curation-utils.dependencies]
 python = ">=3.10"
