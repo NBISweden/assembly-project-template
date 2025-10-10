@@ -1,11 +1,7 @@
-project: 'naiss2023-5-307'
-input: 'samplesheet.csv'
-align: true
-taxon: # TODO; Name or Taxonomy ID for genome species
-accession: # TODO; Genome accession where available or identifier for draft assemblies (e.g Dtol?)
-fasta: # TODO; Path to draft assembly
-blastp: '/sw/data/diamond_databases/reference_proteomes/latest/'
-blastx: '/sw/data/diamond_databases/reference_proteomes/latest/'
-blastn: '/sw/data/blast_databases'
-taxdump: '/sw/data/ncbi_taxonomy/latest/'
-busco: '/sw/data/BUSCO_data/latest/rackham/v5_lineage_sets/lineages'
+project: 'uppmax2025-2-58'
+input: '../../data/outputs/01_ebp-assembly-workflow/07_scaffolding/yahs/hifiasm-scaffolded-default/*_hifiasm-scaffolded-default_scaffolds_final.fa'
+sample: 'qqArtNeph1'
+cram: '../../data/outputs/01_ebp-assembly-workflow/02_read_preprocessing/hi-c_cram/'
+reads: '../../data/outputs/01_ebp-assembly-workflow/02_read_preprocessing/converted_bam_to_fasta/'
+read_type: 'hifi'
+teloseq: 'TTAGGG'

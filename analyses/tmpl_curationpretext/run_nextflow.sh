@@ -26,7 +26,7 @@ function run_nextflow {
     RESULTS="${PWD/analyses/data/outputs}"      # Path to store results from Nextflow
 
     # Path to Nextflow script. Pulls from Github
-    WORKFLOW="${WORKFLOW:-sanger-tol/blobtoolkit}"
+    WORKFLOW="${WORKFLOW:-sanger-tol/curationpretext}"
     # Workflow version or branch to use (default: main)
     BRANCH="${BRANCH:-main}"
 
