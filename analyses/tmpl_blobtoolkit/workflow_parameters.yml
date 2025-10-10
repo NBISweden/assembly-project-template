@@ -2,7 +2,6 @@ project: 'uppmax2025-2-58'
 input: 'samplesheet.csv'
 align: true
 taxon: # TODO; Name or Taxonomy ID for genome species
-accession: # TODO; Genome accession where available or identifier for draft assemblies (e.g Dtol?)
 fasta: # TODO; Path to draft assembly
 blastp: '/proj/snic2022-6-208/private/martin/databases/uniprot_2025_07/reference_proteomes.dmnd'
 blastx: '/proj/snic2022-6-208/private/martin/databases/uniprot_2025_07/reference_proteomes.dmnd'
