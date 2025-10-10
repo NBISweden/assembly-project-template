@@ -1,11 +1,11 @@
-project: 'naiss2023-5-307'
+project: 'uppmax2025-2-58'
 input: 'samplesheet.csv'
 align: true
 taxon: # TODO; Name or Taxonomy ID for genome species
 accession: # TODO; Genome accession where available or identifier for draft assemblies (e.g Dtol?)
 fasta: # TODO; Path to draft assembly
-blastp: '/sw/data/diamond_databases/reference_proteomes/latest/'
-blastx: '/sw/data/diamond_databases/reference_proteomes/latest/'
-blastn: '/sw/data/blast_databases'
-taxdump: '/sw/data/ncbi_taxonomy/latest/'
-busco: '/sw/data/BUSCO_data/latest/rackham/v5_lineage_sets/lineages'
+blastp: '/proj/snic2022-6-208/private/martin/databases/uniprot_2025_07/reference_proteomes.dmnd'
+blastx: '/proj/snic2022-6-208/private/martin/databases/uniprot_2025_07/reference_proteomes.dmnd'
+blastn: '/proj/snic2022-6-208/private/martin/databases/nt_2025_07'
+taxdump: '/proj/snic2022-6-208/private/martin/databases/taxdump_2025_07'
+busco: '/sw/data/BUSCO_data/latest/rackham/v5_lineage_sets'
