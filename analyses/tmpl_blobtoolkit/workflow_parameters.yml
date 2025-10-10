@@ -1,0 +1,10 @@
+project: 'uppmax2025-2-58'
+input: 'samplesheet.csv'
+align: true
+taxon: # TODO; Name or Taxonomy ID for genome species
+fasta: # TODO; Path to draft assembly
+blastp: '/proj/snic2022-6-208/private/martin/databases/uniprot_2025_07/reference_proteomes.dmnd'
+blastx: '/proj/snic2022-6-208/private/martin/databases/uniprot_2025_07/reference_proteomes.dmnd'
+blastn: '/proj/snic2022-6-208/private/martin/databases/nt_2025_07'
+taxdump: '/proj/snic2022-6-208/private/martin/databases/taxdump_2025_07'
+busco: '/sw/data/BUSCO_data/latest/rackham/v5_lineage_sets'

@@ -1,0 +1,4 @@
+project: 'uppmax2025-2-58'
+input: 'sanger-ear_parameters.yaml'
+btk_nf_params: '--project uppmax2025-2-58'
+cpretext_nf_params: '--project uppmax2025-2-58'

@@ -1,0 +1,7 @@
+project: 'uppmax2025-2-58'
+input: '../../data/outputs/01_ebp-assembly-workflow/07_scaffolding/yahs/hifiasm-scaffolded-default/*_hifiasm-scaffolded-default_scaffolds_final.fa'
+sample: 'qqArtNeph1'
+cram: '../../data/outputs/01_ebp-assembly-workflow/02_read_preprocessing/hi-c_cram/'
+reads: '../../data/outputs/01_ebp-assembly-workflow/02_read_preprocessing/converted_bam_to_fasta/'
+read_type: 'hifi'
+teloseq: 'TTAGGG'

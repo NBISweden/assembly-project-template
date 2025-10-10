@@ -11,7 +11,9 @@ A `flowchart` is an example that can be used to display the folder relationships
 
 ```mermaid
 flowchart TD
-  01a[ 01_assembly-workflow_initial-run_rackham ]:::green --> 02a[ 02_assembly-workflow_purge-dups_rackham ]:::green
+  01a[ 01_ebp-assembly-workflow ]:::green --> 02a[ 02_blobtoolkit ]:::green
+  02a --> 03a[ 03_curationpretext ]:::green
+  03a --> 04a[ 04_ear ]:::green
   classDef red stroke:#f00
   classDef green stroke:#0f0
 ```
