@@ -1,0 +1,26 @@
+# General Vales for all subpiplines and modules
+assembly_id: 'TODO:INSERT_ASSEMBLY_ID'
+reference_hap1: 'TODO:/path/to/primary.curated.fa'
+# reference_hap2:
+reference_haplotigs: 'TODO:/path/to/additional_haplotigs.curated.fa'
+
+merquryfk: ## This is the read kmer profile to use for Merqury
+  fastk_hist: '../../data/outputs/01_ebp-assembly-workflow/01_read_inspection/fastk/*.fasta_hifi_fk.hist'
+  fastk_ktab: '../../data/outputs/01_ebp-assembly-workflow/01_read_inspection/fastk/{,.}*.fasta_hifi_fk.ktab*'
+
+# Used by both subpipelines
+longread:
+  type: hifi
+  dir: '../../data/outputs/01_ebp-assembly-workflow/02_read_preprocessing/converted_bam_to_fasta/'
+curationpretext:
+  aligner: minimap2
+  telomere_motif: 'TODO:TTAGGG'
+  hic_dir: '../../data/outputs/01_ebp-assembly-workflow/02_read_preprocessing/hi-c_cram/'
+btk:
+  taxid: 'TODO:INSERT_TAXID'
+  lineages: "TODO:INSERT_LINEAGES"
+  nt_database: '/proj/snic2022-6-208/private/martin/databases/nt_2025_07'
+  nt_database_prefix: 'nt'
+  diamond_uniprot_database_path: '/proj/snic2022-6-208/private/martin/databases/uniprot_2025_07/reference_proteomes.dmnd'
+  diamond_nr_database_path: '/proj/snic2022-6-208/private/martin/databases/uniprot_2025_07/reference_proteomes.dmnd'
+  ncbi_taxonomy_path: '/proj/snic2022-6-208/private/martin/databases/taxdump_2025_07'
