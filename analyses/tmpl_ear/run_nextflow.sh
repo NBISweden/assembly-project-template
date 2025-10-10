@@ -26,9 +26,9 @@ function run_nextflow {
     RESULTS="${PWD/analyses/data/outputs}"      # Path to store results from Nextflow
 
     # Path to Nextflow script. Pulls from Github
-    WORKFLOW="${WORKFLOW:-sanger-tol/blobtoolkit}"
+    WORKFLOW="${WORKFLOW:-mahesh-panchal/sanger-tol-ear}"
     # Workflow version or branch to use (default: main)
-    BRANCH="${BRANCH:-main}"
+    BRANCH="${BRANCH:-dev}"
 
     # Set common path to store all Singularity containers
     export NXF_SINGULARITY_CACHEDIR="${STORAGEALLOC}/nobackup/ebp-singularity-cache"
@@ -78,6 +78,8 @@ echo "Running on HPC=$cluster."
 # Run Nextflow with appropriate settings
 if [ "$cluster" == "rackham" ]; then
     run_nextflow uppmax /proj/snic2021-6-194
+elif [ "$cluster" == "pelle" ]; then
+    run_nextflow uppmax /proj/snic2021-6-194
 elif [ "$cluster" == "dardel" ]; then
     module load PDC apptainer
     export APPTAINER_CACHEDIR=$PDC_TMP/apptainer/cache
@@ -86,8 +88,6 @@ elif [ "$cluster" == "dardel" ]; then
 elif [ "$cluster" == "nac" ]; then
     module load Singularity
     run_nextflow nac /projects/earth_biogenome_project/
-elif [ "$cluster" == "pelle" ]; then
-    run_nextflow pelle /proj/snic2021-6-194
 else
     echo "Error: unrecognised cluster '$cluster'." >&2
     exit 1
