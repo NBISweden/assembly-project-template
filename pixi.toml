@@ -76,7 +76,7 @@ args = [
     { arg = "blobdir" }
 ]
 cmd = """
-singularity exec \
+cd $INIT_CWD && singularity exec \
     -B $PWD \
     -B /scratch \
     $NXF_SINGULARITY_CACHEDIR/docker.io-genomehubs-blobtoolkit-4.4.6.img \
