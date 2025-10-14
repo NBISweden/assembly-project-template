@@ -88,7 +88,7 @@ args = [
     { arg = "blobdir" }
 ]
 cmd = """
-docker run \
+cd $INIT_CWD && docker run \
     -d --rm \
     --platform "linux/amd64" \
     -v "$PWD:/$PWD" \
