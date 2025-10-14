@@ -6,6 +6,10 @@ name = "De novo assembly project"
 platforms = ["linux-64", "osx-arm64"]
 version = "1.0.0"
 
+[activation.env]
+EBP_PROJECT_DIR = '/proj/snic2021-6-194'
+NXF_SINGULARITY_CACHEDIR = '$EBP_PROJECT_DIR/nobackup/ebp-singularity-cache'
+
 [tasks]
 # Template updates
 git-link-template = "git remote add template https://github.com/NBISweden/assembly-project-template"
@@ -65,6 +69,36 @@ cmd = """
 rsync -av --ignore-existing {{ opts }} \
 "data/outputs" \
 "$(git remote get-url hpc)/data/"
+"""
+
+[target.linux.tasks.btk-viewer]
+args = [
+    { arg = "blobdir" }
+]
+cmd = """
+singularity exec \
+    -B $PWD \
+    -B /scratch \
+    $NXF_SINGULARITY_CACHEDIR/docker.io-genomehubs-blobtoolkit-4.4.6.img \
+    blobtools view --remote {{ blobdir }}
+"""
+
+[target.osx.tasks.btk-viewer]
+args = [
+    { arg = "blobdir" }
+]
+cmd = """
+docker run \
+    -d --rm \
+    --platform "linux/amd64" \
+    -v "$PWD:/$PWD" \
+    -w "$PWD" \
+    -v "{{ blobdir }}:/blobtoolkit/datasets/$(basename {{ blobdir }})" \
+    -u "$(id -u):$(id -g)" \
+    -p 8080:8080 -p 8000:8000 \
+    -e VIEWER=true \
+    genomehubs/blobtoolkit:4.4.6
+open http://localhost:8080/view/all
 """
 
 [dependencies]
