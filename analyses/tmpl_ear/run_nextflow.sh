@@ -65,7 +65,6 @@ function run_nextflow {
         -resume \
         -ansi-log false \
         -params-file workflow_parameters.yml \
-        --cache "${STORAGEALLOC}/nobackup/database-cache" \
         --outdir "$RESULTS"
 
     clean_nextflow_cache "$WORKDIR"
