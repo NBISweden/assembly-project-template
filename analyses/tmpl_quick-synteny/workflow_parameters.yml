@@ -1,0 +1,3 @@
+project: 'uppmax2025-2-58'
+genomes: 'genomes.csv'
+protein_db: '/path/to/protein_database.fasta'
