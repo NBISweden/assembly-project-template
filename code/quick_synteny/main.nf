@@ -40,7 +40,7 @@ output {
 }
 
 process ALIGN_PROTEOME {
-    tag species_name
+    tag "${species_name}"
     container 'community.wave.seqera.io/library/miniprot:0.18--c029dc85c45002bd'
 
     input:
@@ -63,7 +63,7 @@ process ALIGN_PROTEOME {
 }
 
 process EXTRACT_CDS_AND_BED {
-    tag species_name
+    tag "${species_name}"
     container 'community.wave.seqera.io/library/agat:1.5.1--ae3cd948ce5e9795'
 
     input:
@@ -79,8 +79,8 @@ process EXTRACT_CDS_AND_BED {
     """
 
     output:
-    path "${species_name}_cds.fa", emit: cds_fasta
-    path "${species_name}.bed", emit: bed
+    tuple val(species_name), path("${species_name}_cds.fa"), emit: cds_fasta
+    tuple val(species_name), path("${species_name}.bed"), emit: bed
     tuple val('agat'), eval('agat --version | cut -c2-'), topic: versions
 }
 
@@ -107,7 +107,7 @@ process SELECT_SEQUENCES {
 }
 
 process ADD_MOCK_FEATURES {
-    tag species_name
+    tag "${species_name}"
     container 'community.wave.seqera.io/library/ucsc-fasize:482--b17e2bc2f92b3fa7'
 
     input:
@@ -132,7 +132,7 @@ process ADD_MOCK_FEATURES {
 }
 
 process REFORMAT_FASTA {
-    tag species_name
+    tag "${species_name}"
     container 'community.wave.seqera.io/library/jcvi:1.5.7--6e88a2d9189b79d4'
 
     input:
