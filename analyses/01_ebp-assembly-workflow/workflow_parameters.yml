@@ -7,3 +7,4 @@ steps: 'inspect,preprocess,assemble,screen,purge,scaffold'
 busco:
 #   lineages: 'auto' # comma separated string of lineages or auto. default: retrieved from GOAT
   lineages_db_path: '/sw/data/BUSCO_data/latest/rackham/v5_lineage_sets'
+oatkdb: '/proj/snic2021-6-194/nobackup/database-cache/OatkDB/v20230921'
