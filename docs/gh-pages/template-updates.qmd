@@ -1,0 +1,130 @@
+# Template updates
+
+The template has changed since your project repo was created. How do you bring
+those changes in?
+
+Repos created with **Use this template** share no git history with the
+template, so `git merge` doesn't work. Instead, pixi tasks show what the
+template changed since your last sync and apply it with a 3-way merge. You
+choose what to keep.
+
+## Checklist
+
+- [ ] Check for template changes at the start of each analysis round.
+- [ ] Apply the relevant changes.
+- [ ] Record the sync point and commit.
+
+## How to:
+
+Run these commands in order, in the project repo on your local machine.
+
+### Add the tasks (once, if `pixi.toml` has no `template-diff` task)
+
+Repos created before these tasks existed don't have them. Copy this block
+from the template's `pixi.toml` into the `[tasks]` section of yours, replacing
+any existing `git-link-template` line:
+
+```{.toml}
+git-link-template = "git remote get-url template &> /dev/null || git remote add template https://github.com/NBISweden/assembly-project-template"
+_template-base = "git rev-parse -q --verify $(cat .template-sync 2>/dev/null)^{commit} || git merge-base HEAD template/main 2>/dev/null || git rev-list -1 --before=$(git log --reverse --format=%cI | head -n 1) template/main"
+template-diff = { cmd = "git fetch -q template && git diff {{ opts }} $(pixi run -q _template-base) template/main -- {{ paths }}", args = [ { arg = "opts", default = "" }, { arg = "paths", default = "" } ], depends-on = ["git-link-template"] }
+template-apply = { cmd = "git rev-parse --verify template/main > $(git rev-parse --git-path template-pending) && git diff $(pixi run -q _template-base) template/main -- {{ paths }} | git apply --3way", args = [ { arg = "paths", default = "" } ] }
+template-mark-synced = "mv $(git rev-parse --git-path template-pending) .template-sync 2>/dev/null || git rev-parse template/main > .template-sync"
+```
+
+Commit it before continuing, so the template changes you apply next stay
+separate from your own edits.
+
+### See what changed
+
+```{.bash}
+pixi run template-diff --stat
+```
+
+This lists the files the template changed since your last sync. The first
+time, that means since the repo was created. It adds the `template` git
+remote if it's missing.
+
+No output means you're up to date.
+
+The first time, check this is the right starting point:
+
+```{.bash}
+git log -1 --format='%h %cd %s' $(pixi run -q _template-base)
+```
+
+The date should be just before your repo was created. If it isn't, find the
+right template commit on GitHub, save its hash with
+`echo <hash> > .template-sync`, and rerun `template-diff`.
+
+### Read the changes
+
+Show the full diff (space pages, `q` quits):
+
+```{.bash}
+pixi run template-diff
+```
+
+Limit it to a file or folder with a second argument. Leave the first one empty
+unless you want `git diff` options:
+
+```{.bash}
+pixi run template-diff "" pixi.toml
+pixi run template-diff --stat analyses/tmpl_ear
+```
+
+Skip changes that don't apply to your project, e.g. a samplesheet for a data
+type you don't have.
+
+### Apply the changes
+
+Start from a clean working tree (`git status` shows nothing to commit), then
+apply everything, or only some paths:
+
+```{.bash}
+pixi run template-apply
+pixi run template-apply analyses/tmpl_blobtoolkit
+```
+
+The output says how each file went:
+
+- `Applied patch to '<file>' cleanly.`: you hadn't changed that part of the
+  file, so the template change is in.
+- `Applied patch to '<file>' with conflicts.`: you and the template both
+  changed the same lines. Open the file, pick between the `<<<<<<< ours` (your
+  version) and `>>>>>>> theirs` (template) blocks, and delete the markers.
+
+To drop a template change you don't want, restore your version:
+
+```{.bash}
+git checkout HEAD -- <file>
+```
+
+Two errors stop the apply without changing anything, even if earlier lines
+said `Applied patch ... cleanly`:
+
+- `error: <file>: does not exist in index`: the template changed a file your
+  project deleted. Skip it by putting `:!` in front of its path, in quotes:
+
+  ```{.bash}
+  pixi run template-apply ":!analyses/tmpl_blobtoolkit"
+  ```
+- `fatal: Needed a single revision`: run `template-diff` first.
+
+`error: No valid patches in input` means there was nothing to apply.
+
+### Record the sync and commit
+
+```{.bash}
+pixi run template-mark-synced
+git add -A
+git commit -m "Sync with assembly-project-template"
+git push
+```
+
+`template-mark-synced` writes the template commit you applied to
+`.template-sync`. If you edited by hand instead, it writes the one
+`template-diff` last fetched. Next time, `template-diff` only shows changes
+made after it, including those you chose to skip.
+
+Pull on the HPC clone as usual (`git pull`).

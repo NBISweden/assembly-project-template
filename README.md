@@ -63,3 +63,17 @@ Once linked, you can use standard Git commands and `pixi` tasks to move data and
     ```
 
 Check the `pixi.toml` file to see how the `hpc` remote is used in these custom tasks.
+
+### Template updates
+
+Project repos share no git history with the template, so template changes are
+diffed and applied with pixi tasks instead of merged:
+
+```bash
+pixi run template-diff --stat   # files the template changed since last sync
+pixi run template-apply         # 3-way apply; resolve any conflicts
+pixi run template-mark-synced   # record the sync point, then commit
+```
+
+See [Template updates](https://nbisweden.github.io/assembly-project-template/template-updates.html)
+for the full walkthrough.

@@ -15,6 +15,7 @@ book:
     - initialize.qmd
     - launch.qmd
     - monitor.qmd
+    - template-updates.qmd
     - close.qmd
     - faq.qmd
     - references.qmd
