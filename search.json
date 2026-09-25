@@ -130,53 +130,83 @@
     ]
   },
   {
+    "objectID": "template-updates.html",
+    "href": "template-updates.html",
+    "title": "5  Template updates",
+    "section": "",
+    "text": "5.1 Checklist\nThe template has changed since your project repo was created. How do you bring those changes in?\nRepos created with Use this template share no git history with the template, so git merge doesn’t work. Instead, pixi tasks show what the template changed since your last sync and apply it with a 3-way merge. You choose what to keep.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Template updates</span>"
+    ]
+  },
+  {
+    "objectID": "template-updates.html#checklist",
+    "href": "template-updates.html#checklist",
+    "title": "5  Template updates",
+    "section": "",
+    "text": "Check for template changes at the start of each analysis round.\nApply the relevant changes.\nRecord the sync point and commit.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Template updates</span>"
+    ]
+  },
+  {
+    "objectID": "template-updates.html#how-to",
+    "href": "template-updates.html#how-to",
+    "title": "5  Template updates",
+    "section": "5.2 How to:",
+    "text": "5.2 How to:\nRun these commands in order, in the project repo on your local machine.\n\nAdd the tasks (once, if pixi.toml has no template-diff task)\nRepos created before these tasks existed don’t have them. Copy this block from the template’s pixi.toml into the [tasks] section of yours, replacing any existing git-link-template line:\ngit-link-template = \"git remote get-url template &&gt; /dev/null || git remote add template https://github.com/NBISweden/assembly-project-template\"\n_template-base = \"git rev-parse -q --verify $(cat .template-sync 2&gt;/dev/null)^{commit} || git merge-base HEAD template/main 2&gt;/dev/null || git rev-list -1 --before=$(git log --reverse --format=%cI | head -n 1) template/main\"\ntemplate-diff = { cmd = \"git fetch -q template && git diff {{ opts }} $(pixi run -q _template-base) template/main -- {{ paths }}\", args = [ { arg = \"opts\", default = \"\" }, { arg = \"paths\", default = \"\" } ], depends-on = [\"git-link-template\"] }\ntemplate-apply = { cmd = \"git rev-parse --verify template/main &gt; $(git rev-parse --git-path template-pending) && git diff $(pixi run -q _template-base) template/main -- {{ paths }} | git apply --3way\", args = [ { arg = \"paths\", default = \"\" } ] }\ntemplate-mark-synced = \"mv $(git rev-parse --git-path template-pending) .template-sync 2&gt;/dev/null || git rev-parse template/main &gt; .template-sync\"\nCommit it before continuing, so the template changes you apply next stay separate from your own edits.\n\n\nSee what changed\npixi run template-diff --stat\nThis lists the files the template changed since your last sync. The first time, that means since the repo was created. It adds the template git remote if it’s missing.\nNo output means you’re up to date.\nThe first time, check this is the right starting point:\ngit log -1 --format='%h %cd %s' $(pixi run -q _template-base)\nThe date should be just before your repo was created. If it isn’t, find the right template commit on GitHub, save its hash with echo &lt;hash&gt; &gt; .template-sync, and rerun template-diff.\n\n\nRead the changes\nShow the full diff (space pages, q quits):\npixi run template-diff\nLimit it to a file or folder with a second argument. Leave the first one empty unless you want git diff options:\npixi run template-diff \"\" pixi.toml\npixi run template-diff --stat analyses/tmpl_ear\nSkip changes that don’t apply to your project, e.g. a samplesheet for a data type you don’t have.\n\n\nApply the changes\nStart from a clean working tree (git status shows nothing to commit), then apply everything, or only some paths:\npixi run template-apply\npixi run template-apply analyses/tmpl_blobtoolkit\nThe output says how each file went:\n\nApplied patch to '&lt;file&gt;' cleanly.: you hadn’t changed that part of the file, so the template change is in.\nApplied patch to '&lt;file&gt;' with conflicts.: you and the template both changed the same lines. Open the file, pick between the &lt;&lt;&lt;&lt;&lt;&lt;&lt; ours (your version) and &gt;&gt;&gt;&gt;&gt;&gt;&gt; theirs (template) blocks, and delete the markers.\n\nTo drop a template change you don’t want, restore your version:\ngit checkout HEAD -- &lt;file&gt;\nTwo errors stop the apply without changing anything, even if earlier lines said Applied patch ... cleanly:\n\nerror: &lt;file&gt;: does not exist in index: the template changed a file your project deleted. Skip it by putting :! in front of its path, in quotes:\npixi run template-apply \":!analyses/tmpl_blobtoolkit\"\nfatal: Needed a single revision: run template-diff first.\n\nerror: No valid patches in input means there was nothing to apply.\n\n\nRecord the sync and commit\npixi run template-mark-synced\ngit add -A\ngit commit -m \"Sync with assembly-project-template\"\ngit push\ntemplate-mark-synced writes the template commit you applied to .template-sync. If you edited by hand instead, it writes the one template-diff last fetched. Next time, template-diff only shows changes made after it, including those you chose to skip.\nPull on the HPC clone as usual (git pull).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Template updates</span>"
+    ]
+  },
+  {
     "objectID": "close.html",
     "href": "close.html",
-    "title": "5  Closing",
+    "title": "6  Closing",
     "section": "",
-    "text": "5.1 Checklist to close a project\nAnalyses have been completed.",
+    "text": "6.1 Checklist to close a project\nAnalyses have been completed.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Closing</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Closing</span>"
     ]
   },
   {
     "objectID": "close.html#checklist-to-close-a-project",
     "href": "close.html#checklist-to-close-a-project",
-    "title": "5  Closing",
+    "title": "6  Closing",
     "section": "",
     "text": "The results have been discussed with the team.\nREADME.md in the root of the project is up to date.\nSequence deliveries are in data/deliveries.\nRaw data is in data/raw-data on rackham.\nAnalysis results are in data/outputs on rackham.\nFrozen outputs/results are in data/frozen on rackham.\nanalyses/History.md is up-to-date with the relationship between analyses.\nAnalysis folders names include where the analysis was run.\nGit has been used to track the latest executed version of the analyses.\nAll code used is present in the repository.\nAn up-to-date finalized report is present in docs/report.\nThe Github repository is up-to-date with the latest tracked files.\nAll files have data provenance (e.g. where data was downloaded from).\nIf this is a BGE Project, the information has been submitted to the BGE tracking tool and is up-to-date (Contact: Henrik).\nNextflow cache has been cleaned.\nResults have been appropriately archived.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Closing</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Closing</span>"
     ]
   },
   {
     "objectID": "close.html#checklist-for-removing-data-from-hpc",
     "href": "close.html#checklist-for-removing-data-from-hpc",
-    "title": "5  Closing",
-    "section": "5.2 Checklist for removing data from HPC",
-    "text": "5.2 Checklist for removing data from HPC\n\nRaw data has been uploaded to/published in a(n external) repository\nPI has been offered/reminded to download raw data locally, and has responded\nAll data have been checked to be in the latest version, and updates (e.g. to an assembly) have been made when applicable\nRemoval decision has been made and approved by all parties (NBIS and PI)\nIntermediate and temporary analysis files have been removed\nData has been removed",
+    "title": "6  Closing",
+    "section": "6.2 Checklist for removing data from HPC",
+    "text": "6.2 Checklist for removing data from HPC\n\nRaw data has been uploaded to/published in a(n external) repository\nPI has been offered/reminded to download raw data locally, and has responded\nAll data have been checked to be in the latest version, and updates (e.g. to an assembly) have been made when applicable\nRemoval decision has been made and approved by all parties (NBIS and PI)\nIntermediate and temporary analysis files have been removed\nData has been removed",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Closing</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Closing</span>"
     ]
   },
   {
     "objectID": "faq.html",
     "href": "faq.html",
-    "title": "6  FAQ",
+    "title": "7  FAQ",
     "section": "",
-    "text": "6.1 Nextflow related",
+    "text": "7.1 Nextflow related",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>FAQ</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>FAQ</span>"
     ]
   },
   {
     "objectID": "faq.html#nextflow-related",
     "href": "faq.html#nextflow-related",
-    "title": "6  FAQ",
+    "title": "7  FAQ",
     "section": "",
-    "text": "Do I need to activate an environment to run the pipeline?\n\n\n\n\n\nNo, the run_nextflow.sh script should automatically load the environment for you.\n\n\n\n\n\n\n\n\n\nHow do I change resources (cpu, memory, time) for a workflow?\n\n\n\n\n\nIf you want to change the resources requested by a Nextflow process, update the nextflow.config in your launch directory (where you run nextflow). Configuration process selectors are used to select which processes to change resources for. The label for withName: can be the simple process name (e.g., MERYL_COUNT), the full process name (e.g., BUILD_MERYL_HIC_DATABASE:MERYL_COUNT), or a java/groovy regular expression (e.g., .*:MERYL_COUNT).\nExample:\nprocess {\n  withName: `BUILD_MERYL_HIC_DATABASE:MERYL_COUNT` {\n    cpus   = 50\n    memory = 250.GB\n    time   = 1.d\n  }\n}\n\n\n\n\n\n\n\n\n\nHow do I change optional command-line interface (cli) parameters to tools?\n\n\n\n\n\nParameters for tools in Nextflow processes are either provided as process input:, or using the ext.args process directive, following the style of nf-core. Mandatory files, Optional files, and mandatory values for running a tool are supplied through process input: in which case there will be a corresponding workflow parameter to supply them if they’re user configurable. In other cases, there are optional command-line flags that could be provided. These are supplied using the process directive ext.args in the nextflow.config in your launch directory.\nExample:\nprocess {\n  withName: `BUILD_MERYL_HIC_DATABASE:MERYL_COUNT` {\n    ext.args = '-v'\n  }\n}\n\n\n\n\n\n\n\n\n\nHow do I use an other branch than the main to run the pipeline?\n\n\n\n\n\nIf you want to test a pull request that was done on https://github.com/NBISweden/Earth-Biogenome-Project-pilot, you can do : Example :\nBRANCH=update_report ./run_nextflow.sh",
+    "text": "TipDo I need to activate an environment to run the pipeline?\n\n\n\n\n\nNo, the run_nextflow.sh script should automatically load the environment for you.\n\n\n\n\n\n\n\n\n\nTipHow do I change resources (cpu, memory, time) for a workflow?\n\n\n\n\n\nIf you want to change the resources requested by a Nextflow process, update the nextflow.config in your launch directory (where you run nextflow). Configuration process selectors are used to select which processes to change resources for. The label for withName: can be the simple process name (e.g., MERYL_COUNT), the full process name (e.g., BUILD_MERYL_HIC_DATABASE:MERYL_COUNT), or a java/groovy regular expression (e.g., .*:MERYL_COUNT).\nExample:\nprocess {\n  withName: `BUILD_MERYL_HIC_DATABASE:MERYL_COUNT` {\n    cpus   = 50\n    memory = 250.GB\n    time   = 1.d\n  }\n}\n\n\n\n\n\n\n\n\n\nTipHow do I change optional command-line interface (cli) parameters to tools?\n\n\n\n\n\nParameters for tools in Nextflow processes are either provided as process input:, or using the ext.args process directive, following the style of nf-core. Mandatory files, Optional files, and mandatory values for running a tool are supplied through process input: in which case there will be a corresponding workflow parameter to supply them if they’re user configurable. In other cases, there are optional command-line flags that could be provided. These are supplied using the process directive ext.args in the nextflow.config in your launch directory.\nExample:\nprocess {\n  withName: `BUILD_MERYL_HIC_DATABASE:MERYL_COUNT` {\n    ext.args = '-v'\n  }\n}\n\n\n\n\n\n\n\n\n\nTipHow do I use an other branch than the main to run the pipeline?\n\n\n\n\n\nIf you want to test a pull request that was done on https://github.com/NBISweden/Earth-Biogenome-Project-pilot, you can do : Example :\nBRANCH=update_report ./run_nextflow.sh",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>FAQ</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>FAQ</span>"
     ]
   }
 ]
