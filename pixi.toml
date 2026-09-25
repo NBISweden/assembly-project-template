@@ -12,8 +12,20 @@ NXF_SINGULARITY_CACHEDIR = '$EBP_PROJECT_DIR/nobackup/ebp-singularity-cache'
 
 [tasks]
 # Template updates
-git-link-template = "git remote add template https://github.com/NBISweden/assembly-project-template"
-# git-merge-template = "git fetch template && git merge template/main --allow-unrelated-histories"
+# Project repos don't share history with the template, so these tasks diff the
+# template since the last sync and apply it with a 3-way merge.
+# Usage: pixi run template-diff [git-diff-opts] [paths]
+#        pixi run template-apply [paths]
+#        pixi run template-mark-synced
+git-link-template = "git remote get-url template &> /dev/null || git remote add template https://github.com/NBISweden/assembly-project-template"
+# Sync point: .template-sync, else the shared history, else the template
+# commit the repo was created from.
+_template-base = "git rev-parse -q --verify $(cat .template-sync 2>/dev/null)^{commit} || git merge-base HEAD template/main 2>/dev/null || git rev-list -1 --before=$(git log --reverse --format=%cI | head -n 1) template/main"
+template-diff = { cmd = "git fetch -q template && git diff {{ opts }} $(pixi run -q _template-base) template/main -- {{ paths }}", args = [ { arg = "opts", default = "" }, { arg = "paths", default = "" } ], depends-on = ["git-link-template"] }
+template-apply = { cmd = "git rev-parse --verify template/main > $(git rev-parse --git-path template-pending) && git diff $(pixi run -q _template-base) template/main -- {{ paths }} | git apply --3way", args = [ { arg = "paths", default = "" } ] }
+# Only template-diff fetches, so apply and mark-synced use the commit you
+# reviewed. mark-synced records the applied commit, else the last fetched one.
+template-mark-synced = "mv $(git rev-parse --git-path template-pending) .template-sync 2>/dev/null || git rev-parse template/main > .template-sync"
 git-link-hpc = { cmd = "git remote add hpc {{ hpc_repo }}", args = ["hpc_repo"] }
 
 # Usage examples:

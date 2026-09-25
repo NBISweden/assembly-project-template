@@ -1,6 +1,6 @@
 # Checklist
 
-- [ ] I'm using the latest version of the [assembly project template](https://github.com/NBISweden/assembly-project-template)
+- [ ] I'm using the latest version of the [assembly project template](https://github.com/NBISweden/assembly-project-template) (`pixi run template-diff` shows no changes to apply).
 
 ## Read data
 
